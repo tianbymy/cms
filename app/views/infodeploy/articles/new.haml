@@ -1,0 +1,16 @@
+%header
+  %h2 新建
+%section
+  = flash[:error_info]
+  = form_for @article,:as => :article,:url => site_channel_articles_path(:channel_id => @channel,:programa_id => @programa),:method => :post do |f| 
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    .portlet.box
+      = render "channel",:f => f
+      .clear
+    .submit
+      = f.submit "下一步",:name => "next",:disable_with => "提交中..."
+
+ 
+  
+
+    

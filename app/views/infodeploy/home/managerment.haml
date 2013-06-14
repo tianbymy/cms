@@ -1,0 +1,48 @@
+.main_content1
+  %h2.title1 页面布局管理
+
+  %table{:align => "center", :bgcolor => "#c7c8c9", :border => "0", :cellpadding => "2", :cellspacing => "1", :style => "margin-top:8px", :width => "97%"}
+    %tr{:align => "center", :bgcolor => "#FAFAF1", :height => "22"}
+      %td{:width => "40px"} 名称
+      %td{:width => "10px"} 显示名称
+      %td{:width => "50%"} 布局框架
+      %td{:width => "10%"} 
+    %tr{:align => "center", :bgcolor => "#FAFAF1", :height => "22"}
+      %td 首页
+      %td 首页
+      %td 首页布局 
+      %td 应用编辑
+  %table{:align => "center", :bgcolor => "#c7c8c9", :border => "0", :cellpadding => "2", :cellspacing => "1", :style => "margin-top:8px", :width => "97%"}
+    %tr{:align => "center", :bgcolor => "#FAFAF1", :height => "22"}
+      %td{:width => "40px"} 区域
+      %td{:width => "10px"}
+      %td{:width => "50%"} 显示频道
+      %td{:width => "10%"} 文章显示数量
+      %td{:width => "10%"} 频道操作
+      %td{:width => "10%"} 区域操作
+      - @areas.each do |area|
+        - homes=Infodeploy::HomeManagerment.where(:number => area)
+        %tr{:align => "center", :bgcolor => "#FAFAF1", :height => "22"}
+          %td{:rowspan => "#{homes.size+1}"}= area
+          %td
+          %td
+          %td
+          %td
+          %td{:rowspan => "#{homes.size+1}"}
+            = link_to "新增频道",new_home_path(:area => area)
+        - homes.each_with_index do |home,count|
+          %tr{:align => "center", :bgcolor => "#FAFAF1", :height => "22"}
+            %td= count+1
+            %td{:width => "7%"}
+              = Infodeploy::Channel.find(home.channel_id).name
+              - if home.programa_id != nil and home.programa_id != ""
+                |
+                = Infodeploy::Programa.find(home.programa_id).name
+            %td= home.amount
+            %td{:width => "17%"}
+              = link_to "编辑",edit_home_path(:id => home.id)
+              = link_to "删除",home_path(:id => home.id),confirm: '您是否要删除此显示频道?',:method => :delete
+		  
+
+  
+

@@ -1,0 +1,14 @@
+.field
+  = f.label "用户名"
+  - if self.action_name == "edit"
+    = f.label @user.name
+  - else
+    = f.select :uid, @mata_user
+
+.field
+  = f.label :角色
+  - Infodeploy::Role.all.each do |role|
+    = check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id)
+    = label_tag role.name
+  = f.hidden_field "role_ids[]", :value => []
+  

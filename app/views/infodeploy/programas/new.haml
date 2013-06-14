@@ -1,0 +1,8 @@
+%header
+  %h2
+    为频道
+    = @channel.name
+    添加栏目
+%section
+  = form_for @programa,:as => :programa,:url => channel_programas_path(:channel_id => @channel.id),:method => :post do |f|
+    = render :partial => 'form',:locals => {:f => f,:channel => @channel,:programa => @programa}

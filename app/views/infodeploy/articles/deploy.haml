@@ -1,0 +1,5 @@
+%header
+  = render  'infodeploy/newslist/fram',:newses => @news,:title => "已发布",:table => "infodeploy/newslist/news_table_deploy",:center_fram => "infodeploy/newslist/deploy_fram"
+
+  .pagenumlist
+    = will_paginate @news, :class => 'apple_pagination' ,:previous_label => '上一页', :next_label => '下一页'      

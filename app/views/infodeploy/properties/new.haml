@@ -1,0 +1,8 @@
+%header
+  %h2 新增文章属性
+
+%section
+  = form_for @property,:as => :property,:url => properties_path,:method => :post do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render "form",:f => f
+

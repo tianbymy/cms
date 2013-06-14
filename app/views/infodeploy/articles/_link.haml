@@ -1,0 +1,26 @@
+- if @article_attributes == nil
+  - @article_attributes=Infodeploy::Catenate.where(:article_id => @article.id).first
+  - if @article_attributes == nil
+    -  @article_attributes=Infodeploy::Catenate.new
+%p
+  %label 标题
+  %span.require *
+  %input{name:"catenate[title]",value:"#{@article_attributes.title}"}
+  = error_span(@article_attributes,:title,"标题")
+%p
+  %label 链接
+  %span.require *
+  %span http://
+  %input{name:"catenate[path]",value:"#{@article_attributes.path}"}
+  = error_span(@article_attributes,:path,"链接")
+%p
+  %label logo
+  %span.require *
+  %input{name:"catenate[logo]",type:"file"}
+%p
+  %label 是否启用
+  %input{name:"catenate[enabled]",type:"radio",value:"1",checked:"checked"}
+  %label{:class=>"lable_for_radio"} 启用
+  %input{name:"catenate[enabled]",type:"radio",value:"0"}
+  %label{:class=>"lable_for_radio"} 禁用
+.clear

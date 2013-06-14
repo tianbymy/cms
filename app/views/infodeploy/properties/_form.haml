@@ -1,0 +1,14 @@
+.portlet.box
+  %p
+    %label 名称
+    %span.require *
+    %input#property{name:"property[name]", value:"#{@property.name}"}
+    = error_span(@property,:name,"名称")
+  %p
+    %label 标识
+    %span.require *
+    %input#property{name:"property[marked]", value:"#{@property.marked}"}
+    = error_span(@property,:marked,"标识")
+    %span.example 注意:标识用于系统识别属性名称,并且必须唯一
+= f.submit "保存",:disable_with => "提交中..."
+= link_to "返回",properties_path,:class => "button_4"

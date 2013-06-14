@@ -1,0 +1,12 @@
+= form_for(@channel) do |f|
+  .portlet.box
+    %label 名称
+    %span.require *
+    %input#channel_name{name:"channel[name]", value:"#{@channel.name}"}
+    =error_span(@channel,:name,"名称")    
+
+  = f.submit "保存",:disable_with => "提交中..."
+  %a{:href => "/infodeploy/channels"}返回
+
+      
+     

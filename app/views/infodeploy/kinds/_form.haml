@@ -1,0 +1,22 @@
+.portlet.box
+  %p
+    %label 名称
+    %span.require *
+    = f.text_field :name
+    = error_span(@kind,:name,"名称")
+  %p
+    %label 是否显示
+    = f.radio_button :condition,"1",:checked => "checked"
+    = f.label "是"
+    = f.radio_button :condition,"0"
+    = f.label "否"
+  %p
+    %label 排序
+    %span.require *
+    = f.text_field :number
+    = error_span(@kind,:number,"排序")
+    %span.example 排序必须是数字
+
+%footer
+  = f.submit "保存",:disable_with => "提交中..."
+  %a{:href => "/infodeploy/partners"}返回

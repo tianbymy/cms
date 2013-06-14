@@ -1,0 +1,5 @@
+%header
+  %h2 编辑页面应用
+%section
+  = form_for @sections,:as => :sections,:url => page_section_path,:method => :put do |f|
+    = render "form_edit",:f => f

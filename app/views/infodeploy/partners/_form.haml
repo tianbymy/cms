@@ -1,0 +1,28 @@
+.portlet.box
+  %p
+    %label 名称
+    %span.require *
+    %input#partner{name:"partner[name]", value:"#{@partner.name}"}
+    = error_span(@partner,:name,"名称")
+  %p
+    %label 链接
+    %span.require *
+    %input#partner{name:"partner[link]", value:"#{@partner.link}", placeholder: "http://www.example.com"}
+    = error_span(@partner,:link,"链接")
+    %span.example 例：http://www.baidu.com
+  %p
+    %label 是否显示
+    = f.radio_button :condition,"1"
+    = f.label "是"
+    = f.radio_button :condition,"0"
+    = f.label "否"
+  %p
+    %label 排序
+    %span.require *
+    %input#partner{name:"partner[number]", value:"#{@partner.number}"}
+    = error_span(@partner,:number,"排序")
+    %span.example 排序必须是数字
+
+%footer
+  = f.submit "保存",:disable_with => "提交中..."
+  %a{:href => "/infodeploy/partners",:class =>"button_4"}返回

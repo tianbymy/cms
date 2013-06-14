@@ -1,0 +1,10 @@
+= render "form"
+%p
+  %label 附件
+  %span.require &nbsp;
+  %input{name:"wordage[attachment]",type:"file"}
+%p
+  %label 视频
+  %span.require &nbsp;
+  %input{name:"wordage[video]",type:"file"}
+  = error_span(@article_attributes,:video,"视频")

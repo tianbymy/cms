@@ -1,0 +1,43 @@
+- if @article_attributes == nil
+  - @article_attributes=Infodeploy::Product.where(:article_id => @article.id).first
+  - if @article_attributes == nil
+    -  @article_attributes=Infodeploy::Product.new
+
+
+%p
+  %label 标题
+  %span.require *
+  %input{name:"product[title]",value:"#{@article_attributes.title}"}
+  = error_span(@article_attributes,:title,"标题")
+%p
+  %label 所属企业
+  %span.require *
+  %input{name:"product[organ]",value:"#{@article_attributes.organ}"}
+  = error_span(@article_attributes,:organ,"所属企业")
+%p
+  %label logo
+  %span.require *
+  %input{name:"product[logo]",type:"file"}
+  = error_span(@article_attributes,:logo,"logo")
+%p
+  %label 产品类别
+  %span.require *
+  - Infodeploy::Product.categories.each do |category|
+    - if @article_attributes.categories.include?(category)
+      %input{name:"product[categories][]",:type => "checkbox",:checked => "checked",:value => "#{category}"}
+      %span= category
+    - else
+      %input{name:"product[categories][]",:type => "checkbox",:value => "#{category}"}
+      %span= category
+  = error_span(@article_attributes,:categories,"产品类别")
+%p
+  %label 购买主体
+  %span.require *
+  - Infodeploy::Product.all_consumer.each do |consumer|
+    - if @article_attributes.consumers.include?(consumer)
+      %input{name:"product[consumers][]",:type => "checkbox",:checked => "checked",:value => "#{consumer}"}
+      %span= consumer
+    - else
+      %input{name:"product[consumers][]",:type => "checkbox",:value => "#{consumer}"}
+      %span= consumer
+  = error_span(@article_attributes,:consumers,"购买主体")

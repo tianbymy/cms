@@ -1,0 +1,13 @@
+%div= flash[:result]
+= form_tag more_deploy_articles_path,:method => :post do
+        
+  = render table,:newses => newses
+
+  = link_to "全选","#",:onclick => "checkall()"
+  |
+  = link_to "取消","#",:onclick => "cancel()"
+  |
+  = submit_tag "批量发布", :class =>"batch",confirm: "您是否要发布所选文章?",:name => "deploy",:disable_with => "提交中..."
+  |
+  = submit_tag "批量退回", :class =>"batch",confirm: "您是否要退回所选文章?",:name => "fail",:disable_with => "提交中..."
+    

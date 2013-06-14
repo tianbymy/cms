@@ -1,0 +1,21 @@
+%td=count+1
+%td
+  = check_box_tag "news[]",news.id
+%td= news.title
+%td
+  = Infodeploy::Channel.find(news.channel_id).name
+  |
+  - if news.programa_id != nil and news.programa_id != ""
+    = Infodeploy::Programa.find(news.programa_id).name
+%td= Infodeploy::Programa.get_kind_name(news.type)
+%td
+  李四
+  =news.created_at.strftime('%Y-%m-%d %H:%M:%S')
+%td= news.author
+%td
+  - if news.deploy_type == 0
+    = news.deploy_start.strftime('%Y-%m-%d')
+    %span /
+    = news.deploy_end.strftime('%Y-%m-%d')
+  - else
+    永久

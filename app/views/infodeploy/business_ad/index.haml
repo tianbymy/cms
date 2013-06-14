@@ -1,0 +1,40 @@
+%header
+  %nav
+    %a{:href => "/infodeploy/business_ad/new"}新增信息
+  %h2 招商信息
+
+%section
+  %table.list
+    %thead
+      %tr
+        %th 序号
+        %th 标题
+        %th 招商企业
+        %th 行业
+        %th 联系人
+        %th 联系电话
+        %th 发布人
+        %th 发布时间
+        %th 显示截止时间
+        %th 操作
+    %tbody
+      - @business_ads.each_with_index do |ad,count|
+        %tr
+          %td= count+1
+          %td= ad.title
+          %td= ad.enterprise
+          %td= ad.industry
+          %td= ad.contactor
+          %td= ad.contact_method
+          %td 管理员
+          %td= ad.created_at.strftime('%Y-%m-%d %H:%M:%S')
+          %td= ad.end_date.strftime('%Y-%m-%d %H:%M:%S')
+          %td
+            = link_to "预览",business_ad_path(ad)
+            |
+            = link_to "编辑",edit_business_ad_path(ad)
+            |
+            = link_to "删除",business_ad_path(ad),confirm: '您是否要删除该招商信息?',:method => :delete
+            
+  .pagenumlist
+    = will_paginate @business_ads, :class => 'apple_pagination' ,:previous_label => '上一页', :next_label => '下一页'      

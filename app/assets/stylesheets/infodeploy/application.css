@@ -1,0 +1,203 @@
+@charset "UTF-8";
+/* ------ 常用配置 ------ */
+/* ------ 通用配置 ------ */
+body {
+  font-family: "微软雅黑" Verdana, sans-serif;
+  color: #484848; }
+
+body, input, select, p {
+  margin: 0;
+  padding: 0; }
+
+a, a:link, a:visited {
+  color: #2a5685;
+  text-decoration: none; }
+
+input, select {
+  margin-bottom: 1px;
+  margin-top: 1px;
+  vertical-align: middle;
+  font-size: 1em; }
+
+.icon-save {
+  background-image: url("../images/save.png"); }
+
+.icon {
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 2px; }
+
+table.list1 {
+  border: 1px solid #e4e4e4;
+  border-collapse: collapse;
+  margin-bottom: 4px;
+  width: 100%; }
+  table.list1 th {
+    background-color: #eeeeee;
+    padding: 4px;
+    white-space: nowrap;
+    text-align: left; }
+  table.list1 td {
+    padding: 4px;
+    border: 1px solid #e4e4e4; }
+  table.list1 tbody tr:nth-child(even) {
+    /*background-color: #fff */ }
+
+table.list {
+  border: 1px solid #e4e4e4;
+  border-collapse: collapse;
+  margin-bottom: 4px;
+  width: 100%; }
+  table.list th {
+    background-color: #eeeeee;
+    padding: 4px;
+    white-space: nowrap;
+    text-align: left; }
+  table.list td {
+    padding: 4px; }
+  table.list tbody tr:nth-child(even) {
+    background-color: #f6f7f8; }
+  table.list .status, table.list .number {
+    text-align: center; }
+
+header#home {
+  background-color: #507aaa;
+  color: #f8f8f8;
+  height: 5.3em;
+  margin: 0;
+  padding: 4px 8px 0 6px;
+  position: relative; }
+  header#home h1 {
+    font-size: 1.9em;
+    margin: 0;
+    padding: 0.25em 0 0 0.25em; }
+  header#home nav {
+    bottom: 0;
+    left: 6px;
+    margin-right: -500px;
+    position: absolute; }
+    header#home nav ul {
+      margin: 0;
+      padding: 0; }
+      header#home nav ul li {
+        float: left;
+        list-style-type: none;
+        margin: 0 2px 0 0;
+        padding: 0;
+        white-space: nowrap; }
+        header#home nav ul li a {
+          color: white;
+          display: block;
+          font-weight: bold;
+          margin: 0;
+          padding: 4px 10px;
+          text-decoration: none; }
+        header#home nav ul li a.selected, header#home nav ul li a.selected:hover {
+          background: none repeat scroll 0 0 white;
+          color: #555555; }
+
+.new_article input[type="radio"], .new_article input[type="checkbox"] {
+  width: 4em !important;
+  float: left; }
+
+.edit_article input[type="radio"], .edit_article input[type="checkbox"] {
+  width: 4em !important;
+  float: left; }
+
+.lable_for_radio {
+  width: 4em !important; }
+
+.left {
+  float: left; }
+
+.label_w4 {
+  width: 4em !important; }
+
+.batch {
+  border: 0px;
+  background-color: transparent;
+  color: #2a5685; }
+
+article.workarea {
+  padding: 8px; }
+  article.workarea header nav {
+    float: right;
+    font-size: 0.9em;
+    line-height: 1.4em;
+    margin-top: 5px;
+    padding-left: 10px;
+    white-space: nowrap; }
+  article.workarea header h2 {
+    border-bottom: 1px solid #bbbbbb;
+    color: #444444;
+    font-size: 20px;
+    margin: 0 0 10px;
+    padding: 2px 10px 4px 0; }
+  article.workarea header h3 {
+    font-size: 1em; }
+  article.workarea section label {
+    display: block;
+    float: left;
+    width: 10em; }
+  article.workarea section span.require {
+    display: block;
+    float: left;
+    width: 1em;
+    padding: 0 0.2em;
+    color: red;
+    text-align: right; }
+  article.workarea section span.example {
+    padding-left: 1em;
+    font-size: 0.9em;
+    color: #666666; }
+  article.workarea section span.error-message {
+    color: red;
+    font-size: 0.9em; }
+
+/* 页面布局 */
+.area_a {
+  float: left;
+  width: 49%; }
+
+.area_b {
+  float: right;
+  width: 49%; }
+
+.clear {
+  clear: both; }
+
+.box {
+  background-color: #f6f6f6;
+  border: 1px solid #e4e4e4; }
+
+.datalist, .selectlist {
+  height: 240px;
+  width: 260px;
+  float: left; }
+  .datalist .databox, .datalist .selectbox, .selectlist .databox, .selectlist .selectbox {
+    height: 200px;
+    overflow-x: hidden; }
+    .datalist .databox .list, .datalist .selectbox .list, .selectlist .databox .list, .selectlist .selectbox .list {
+      height: 24px;
+      line-height: 24px; }
+
+.datalist {
+  margin-left: 20px; }
+
+.selectlist .list label {
+  padding-left: 30px; }
+
+.portlet {
+  color: #505050;
+  line-height: 1.5em;
+  margin-bottom: 10px;
+  padding: 6px; }
+
+.area h3 {
+  border-bottom: 1px solid #bbbbbb;
+  font-size: 16px !important;
+  padding: 0.1em;
+  margin-top: 0;
+  margin-bottom: 0.4em; }

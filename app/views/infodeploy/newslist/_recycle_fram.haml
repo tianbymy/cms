@@ -1,0 +1,14 @@
+%div= flash[:dispose_info]
+= form_tag more_dispose_recycles_path,:method => :post do
+
+
+  = render table,:newses => newses
+  
+  = link_to "全选","#",:onclick => "checkall()"
+  |
+  = link_to "取消","#",:onclick => "cancel()"
+  |
+  = submit_tag "批量恢复",:class =>"batch",:name =>"recover", confirm: "您是否要恢复所选文章?",:disable_with => "恢复中..."
+  |
+  = submit_tag "批量删除",:class =>"batch",:name =>"destroy", confirm: "您是否要删除所选文章?文章删除将不能恢复!",:disable_with => "删除中..."
+

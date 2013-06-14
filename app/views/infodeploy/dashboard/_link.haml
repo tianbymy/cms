@@ -1,0 +1,10 @@
+- catenate=Infodeploy::Catenate.where(:article_id => news.id).first
+%td= catenate.title
+%td
+  = Infodeploy::Channel.find(news.channel_id).name
+  |
+  - if news.programa_id != nil and news.programa_id != ""
+    = Infodeploy::Programa.find(news.programa_id).name
+%td= Infodeploy::Programa.get_kind_name(news.type)
+%td 提交人
+%td=news.updated_at.strftime('%Y-%m-%d %H:%M:%S')

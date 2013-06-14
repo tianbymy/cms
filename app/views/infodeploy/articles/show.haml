@@ -1,0 +1,14 @@
+%header
+  %h2 已发布文稿预览
+
+%section
+  .portlet.box
+    - @news=@article
+    = render "infodeploy/article_content/#{@news.type}"
+
+%footer
+  = link_to "编辑",edit_article_path(:id => @news.id,:page => "deploy")
+  |
+  = link_to "下架",lower_rack_articles_path(:article_id => @news.id),:method => :post,confirm: "您是否确定要将此文章下架?"
+  |
+  %a{:href =>"/infodeploy/articles/deploy"}返回

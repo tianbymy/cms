@@ -1,0 +1,15 @@
+%header
+  %h2 编辑
+%section
+  = form_for @history,:as => :history,:url => search_history_path(:id => @history.id),:method => :put do |f| 
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    .portlet.box
+      %p
+        %label 标题
+        %span.require *
+        %input{name:"history[keyword]",value:"#{@history.keyword}"}
+        = error_span(@history,:keyword,"标题")
+      .clear
+    .submit
+      = f.submit "保存",:name => "next",:disable_with => "提交中..."
+      = link_to "返回",search_histories_path

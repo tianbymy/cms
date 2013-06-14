@@ -1,0 +1,35 @@
+header
+  h2 评论管理
+
+section
+  table.list
+    thead
+      tr
+        th 序号
+        th 文章标题
+        th 评论内容
+        th 评论人
+        th 评论时间
+        th 审核状态
+        th
+    tbody
+      -@comments.each_with_index do |comment,count|
+        tr
+          td=count+1
+          td
+            -article = (Infodeploy::Article.find(comment.article_id) rescue nil)
+            -if article
+              - if ["text","image","video"].include?(article.type)
+                -if wordage=Infodeploy::Wordage.where(article_id: comment.article_id).first
+                  =link_to wordage.title,main_app.other_newsshow_path(comment.article_id),:target=>"_blank"
+
+          td=comment.content
+          td=comment.actor
+          td=comment.created_at.strftime("%Y-%m-%d %H:%M:%S")
+          td
+            -if comment.status ==0
+              =link_to "待审核",comment_update_status_path(comment.id),:style =>"color:red"
+            -else
+              span 已审核
+          td
+            =link_to "删除", comment_path(:id => comment.id), confirm: "您是否要删除此条评论?", :method => "delete"

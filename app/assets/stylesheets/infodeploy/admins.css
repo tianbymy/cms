@@ -1,0 +1,145 @@
+/*  admin右边框架样式  */
+.main_content1{
+        width:85%;
+}
+.right_content1{
+	
+	background:#c7c8c9;
+	margin-top:8px;
+	margin-bottom:8px;
+	width :100%;
+}
+.right_content1 td{
+        font-size: 12px;
+}
+.button_t {
+	padding:8px 9px 11px;
+	background:url(images/nav3.png) no-repeat;
+
+}
+.cu th{
+	background:#FAFAF1;
+	height:32px;
+        font-size:14px;
+}
+.useritem{
+        margin-top:10px;
+}
+
+.item{
+	padding:8px 0 0 22px;
+        font-size:12px;
+}
+.new_text{
+        height:20px;
+	width:180px;
+	color:#000;
+	background:#ffffff;
+	margin-top:10px;
+	font-family:Arial,Helvetica,sans-serif;
+}
+.user_text{
+	
+        height:20px;
+	width:180px;
+	color:#000;
+	background:#ffffff;
+	margin-top:10px;
+	margin-left:18px;
+	font-family:Arial,Helvetica,sans-serif;
+}
+.user_text3{
+	line-height:30px;
+        height:20px;
+	width:180px;
+	color:#000;
+	background:#fff;
+	margin-top:10px;
+	margin-left:6px;
+	font-family:Arial,Helvetica,sans-serif;
+}
+.user_text4{
+	line-height:30px;
+        height:20px;
+	width:180px;
+	color:#000;
+	background:#fff;
+	margin-top:10px;
+	margin-left:5px;
+	font-family:Arial,Helvetica,sans-serif;
+}
+.user_text5{
+	line-height:30px;
+        height:20px;
+	width:180px;
+	color:#000;
+	background:#fff;
+	margin-top:10px;
+
+	font-family:Arial,Helvetica,sans-serif;
+}
+.item_p {
+        padding: 8px 0 0 23px;
+}
+
+
+.submit_save{
+	padding-left:18%;
+        padding-top: 15px;
+
+}
+.submit {
+    margin: 10px 0 0 44.5%;
+}
+
+.item select{
+        padding-left: 5px;
+        margin-left:18px;
+        background: #ffffff;
+}
+.lc{
+        border:0px;
+        background: transparent;
+
+}
+.lc:link {
+	font-size:13px;
+	color:#000000;
+	font-family: "宋体";
+	line-height: 25px;
+	text-decoration: none;
+}
+.lc:visited{
+	font-size: 15px;
+	color: #000000;
+	font-family: "宋体";
+	line-height: 25px;
+	text-decoration: none;
+}
+.lc:hover {
+	color: red;
+	font-family: "宋体";
+	line-height: 25px;
+	text-decoration: none;
+}
+
+em,span{
+        color: red;
+}
+em {
+        margin-left: 32px;
+}
+.ps {
+        margin-left: 40px;
+}
+.item_p {
+        padding: 8px 0 0 23px;
+}
+.dt {
+        display: block;
+}
+.h {
+        margin: 2px 0 0 15px;
+}
+
+

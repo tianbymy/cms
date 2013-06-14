@@ -1,0 +1,59 @@
+%header
+  %nav
+    = link_to "新建种类",new_kind_path
+  %h2 合作伙伴
+
+%section
+  %thead
+    %table.list
+      %tr
+        %th 序号
+        %th 类别
+        %th 名称
+        %th 链接
+        %th 是否显示
+        %th 排序
+        %th 录入时间
+        %th 操作
+      - @kinds.each_with_index do |kind,count|
+        - partners=Infodeploy::Partner.where(:kind_id => kind.id).asc("number")
+        %tr
+          %td= count=count+1
+          %td= kind.name
+          %td 
+          %td 
+          %td
+            - if kind.condition == "0"
+              = "否"
+            - else
+              = "是"
+          %td= kind.number
+          %td= kind.created_at.strftime('%Y-%m-%d %H:%M:%S')
+          %td
+            = link_to "新增链接",new_kind_partner_path(:kind_id => kind.id)
+            = link_to "编辑", edit_kind_path(kind)
+            - if partners.size == 0
+              = link_to "删除", kind_path(kind),confirm: '您是否要删除该合作伙伴类别?',:method => :delete
+          - number = count
+        - partners.each_with_index do |partner,count|
+          %tr
+            %td= number.to_s+"."+(count+1).to_s
+            %td
+            %td= partner.name
+            %td= partner.link
+            %td
+              - if partner.condition == "0"
+                = "否"
+              - else
+                = "是"
+            %td= partner.number
+            %td= partner.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            %td
+              = link_to "编辑", edit_kind_partner_path(:kind_id => kind.id,:id => partner.id)
+              = link_to "删除", kind_partner_path(:kind_id => kind.id,:id => partner.id),confirm: '您是否要删除该链接?',:method => :delete
+
+
+
+          
+
+    

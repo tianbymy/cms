@@ -1,0 +1,19 @@
+%h1 角色用户分配
+%label{style:"color:red"}= flash[:notice]
+
+= form_tag create_more_users_path(role_ids: @role) do
+
+  .field
+    = label_tag "当前角色: #{@role.name}"
+
+  .field
+    = label_tag :可分配用户
+    - Infodeploy::MetaUser.find_all.each do |user|
+      - unless user[1] == session[:cas_user]
+        = check_box_tag "users[]", user[1], @role.user_exist?(user[1])
+        = label_tag user[0]
+
+  .action
+    = submit_tag "保存"
+    = link_to "返回", roles_path
+    = link_to "更新用户数据", sync_users_path

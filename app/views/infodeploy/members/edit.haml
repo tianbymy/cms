@@ -1,0 +1,20 @@
+%header
+  %h2 
+    编辑
+    = @member[:uid]
+    - p  @member
+    信息
+%section
+  = form_tag  member_path(:id => @member[:uid]),:method => :put do
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    .portlet.box
+      %p
+        %label 姓名
+        %span.require *
+        %input{name:"member[display]",value:"#{@new_member[:display]}"}
+        = register_errors(:display,"姓名",@errors)
+
+      .clear
+    .submit
+      = submit_tag "保存",:name => "next",:disable_with => "提交中..."
+      = link_to "返回",members_path

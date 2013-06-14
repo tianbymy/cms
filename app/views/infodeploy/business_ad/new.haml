@@ -1,0 +1,8 @@
+%header
+  %h2 新增信息
+
+%section
+  = form_for @business_ad,:as => :business_ad,:url => business_ad_index_path,:method => :post do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render "form",:f => f
+            

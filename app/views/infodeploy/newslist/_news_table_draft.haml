@@ -1,0 +1,15 @@
+%section
+  %table.list
+    %tr
+      = render "infodeploy/newslist/article_title"
+      %th 操作
+    - newses.each_with_index do |news,count|
+      %tr
+        = render "infodeploy/article_table_content/#{news.type}",:count => count,:news => news
+        %td
+          = link_to "编辑",edit_article_path(:id => news.id,:page => "index")
+          |
+          = link_to "预览", article_draft_show_path(:article_id => news.id)
+          |
+          = link_to "发送至审核",send_audit_articles_path(:article_id => news.id), confirm: "您是否要将文章草稿发送至审核?",:method => :post
+        

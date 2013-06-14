@@ -1,0 +1,7 @@
+h2 添加评论
+= simple_form_for @comment do |f|
+  .portlet.box
+    =f.input :content,:as=>"text"
+  = f.submit "保存",:disable_with => "提交中..."
+
+

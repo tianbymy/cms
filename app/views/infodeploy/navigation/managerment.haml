@@ -1,0 +1,47 @@
+%header
+  %nav
+    = link_to "添加导航",new_navigation_path()
+  %h2 导航管理
+%section
+  %table.list
+    %thead
+      %tr
+        %th 序号
+        %th 名称
+        %th 链接类型
+        %th 显示页面
+        %th 新窗口打开
+        %th 主导航显示
+        %th 排序
+        %th
+      -index=0
+      - @navigation.each do |list|
+      - index=index+1
+        %tr
+          %td= index
+          %td= list.name
+          %td
+            -if list.url !=""
+              外链：
+              = list.url
+              %td
+              %td
+            -else
+              内链
+              %td= list.page.title
+              %td
+                - if list.openpage ==1
+                  是
+                - else
+                  否
+              %td
+                - if list.enabled ==0
+                  是
+                - else
+                  否
+
+          %td= list.number
+          %td
+            = link_to "编辑", edit_navigation_path(list)
+            - if list.system !=0
+              = link_to "删除", navigation_path(list),:confirm=> '您是否要删除该导航?', :method =>:delete

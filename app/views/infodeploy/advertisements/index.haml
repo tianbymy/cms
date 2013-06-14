@@ -1,0 +1,46 @@
+%header
+  %h2 广告管理
+%section
+  - @ads.each do |ads|          
+    %table.list
+      %tr
+        %th
+          =ads.number
+          号广告位,尺寸：
+          -Infodeploy::Ads.get_size.each do |idx|
+            -if ads.size == idx[:id]
+              =idx[:size]
+        %th
+        %th
+        %th
+        %th
+      %tr
+        %td
+        %td 联系人
+        %td 联系电话
+        %td 有效期
+        %td
+          = link_to ' 编辑默认',edit_default_ad_advertisements_path(ads.id)
+
+          -ad = Infodeploy::Advertisement.where(:ads_id=>ads.id.to_s,:number=>0 )
+          -if ad.first !=nil
+            = link_to ' 预览默认',ad_advertisement_path(ads.id,ad.first.id)
+          -if Infodeploy::Advertisement.where(:ads_id=>ads.id.to_s).size >0
+            = link_to ' 新增广告', new_ad_advertisement_path(:ad_id=>ads.id,:number=>ads.number)
+      -adlist=Infodeploy::Advertisement.where(:ads_id=>ads.id.to_s)
+      -adlist.each_with_index do |list,count|
+        -if list.number !=0
+
+          %tr
+            %td=list.name+count.to_s
+            %td=list.contactor
+            %td=list.contact_method
+            %td
+              =list.start_date.strftime('%Y-%m-%d %H:%M:%S')
+              %span /
+              =list.end_date.strftime('%Y-%m-%d %H:%M:%S')
+              = link_to "预览",ad_advertisement_path(ads.id,list.id)
+              = link_to "编辑",edit_ad_advertisement_path(:ad_id => ads.id,:id => list.id)
+              = link_to "删除",ad_advertisement_path(:ad_id => ads.id,:id => list.id),:method => :delete, confirm: "您是否要删除此广告?"
+
+           

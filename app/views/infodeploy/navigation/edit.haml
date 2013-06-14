@@ -1,0 +1,9 @@
+%header
+  %h2 编辑
+
+%section
+  = form_for @navigation,:as => :navigation,:url => navigation_path(:id => @navigation.id),:method => :put do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    
+    = render "form",:f => f
+ 

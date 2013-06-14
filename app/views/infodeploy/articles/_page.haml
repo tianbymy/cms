@@ -1,0 +1,11 @@
+- if @article_attributes == nil
+  - @article_attributes=Infodeploy::Alone.where(:article_id => @article.id).first
+  - if @article_attributes == nil
+    -  @article_attributes=Infodeploy::Alone.new
+%p
+  %label 内容
+  %span.require *
+  = kindeditor_tag "alone[content]","#{@article_attributes.content}", :width => 750, :height => 300
+  = error_span(@article_attributes,:content,"内容")
+
+.clear

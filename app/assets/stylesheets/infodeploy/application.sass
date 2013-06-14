@@ -1,0 +1,235 @@
+/* ------ 常用配置 ------ */
+@mixin shielded_line
+  border-bottom: 1px solid #BBBBBB
+
+@mixin left_block
+  display: block
+  float: left
+
+/* ------ 通用配置 ------ */
+body
+  font:
+    family: "微软雅黑" Verdana,sans-serif
+
+  color: #484848
+
+body, input, select, p
+  margin: 0
+  padding: 0
+  
+    
+a, a:link, a:visited
+  color: #2A5685
+  text-decoration: none
+
+input, select
+  margin-bottom: 1px
+  margin-top: 1px
+  vertical-align: middle
+  font-size: 1em
+
+.icon-save
+  background-image: url("../images/save.png")
+
+.icon
+  background-position: 0 50%
+  background-repeat: no-repeat
+  padding:
+    bottom: 3px
+    left: 20px
+    top: 2px
+
+table.list1
+  border: 1px solid #E4E4E4
+  border-collapse: collapse
+  margin-bottom: 4px
+  width: 100%
+  th
+    background-color: #EEE
+    padding: 4px
+    white-space: nowrap
+    text-align: left
+
+  td
+    padding: 4px
+    border: 1px solid #E4E4E4
+
+  tbody
+    tr:nth-child(even)
+      /*background-color: #fff
+table.list
+  border: 1px solid #E4E4E4
+  border-collapse: collapse
+  margin-bottom: 4px
+  width: 100%
+
+  th
+    background-color: #EEEEEE
+    padding: 4px
+    white-space: nowrap
+    text-align: left
+
+  td
+    padding: 4px
+      
+  tbody
+    tr:nth-child(even)
+      background-color: #F6F7F8
+
+  .status, .number
+    text-align: center
+
+
+header#home
+  background-color: #507AAA
+  color: #F8F8F8
+  height: 5.3em
+  margin: 0
+  padding: 4px 8px 0 6px
+  position: relative
+
+  h1
+    font-size: 1.9em
+    margin: 0
+    padding: 0.25em 0 0 0.25em
+    
+  nav
+    bottom: 0
+    left: 6px
+    margin-right: -500px
+    position: absolute
+
+    ul
+      margin: 0
+      padding: 0
+
+      li
+        float: left
+        list-style-type: none
+        margin: 0 2px 0 0
+        padding: 0
+        white-space: nowrap
+
+        a
+          color: #FFFFFF
+          display: block
+          font-weight: bold
+          margin: 0
+          padding: 4px 10px
+          text-decoration: none
+
+        a.selected, a.selected:hover
+          background: none repeat scroll 0 0 #FFFFFF
+          color: #555555
+.new_article 
+  input[type="radio"],input[type="checkbox"]
+    width: 4em !important
+    float: left
+.edit_article
+  input[type="radio"],input[type="checkbox"]
+    width: 4em !important
+    float: left
+
+.lable_for_radio
+  width: 4em !important
+.left
+  float: left
+.label_w4
+  width: 4em !important
+.batch
+  border: 0px
+  background-color: transparent
+  color: #2A5685
+
+article.workarea
+  padding: 8px
+  
+  header
+    nav
+      float: right
+      font-size: 0.9em
+      line-height: 1.4em
+      margin-top: 5px
+      padding-left: 10px
+      white-space: nowrap
+
+    h2
+      @include shielded_line
+      color: #444444
+      font-size: 20px
+      margin: 0 0 10px
+      padding: 2px 10px 4px 0
+
+    h3
+      font-size: 1em
+
+
+  section
+    label
+      @include left_block
+      width: 10em
+
+    span.require
+      @include left_block
+      width: 1em
+      padding: 0 0.2em
+      color: red
+      text-align: right
+
+    span.example
+      padding:
+        left: 1em
+      font-size: 0.9em
+      color: #666666
+
+    span.error-message
+      color: red
+      font-size: 0.9em
+        
+
+/* 页面布局 */
+.area_a
+  float: left
+  width: 49%
+
+.area_b
+  float: right
+  width: 49%
+.clear
+  clear: both
+
+.box
+  background-color: #F6F6F6
+  border: 1px solid #E4E4E4
+.datalist, .selectlist
+  height: 240px
+  width: 260px
+  float: left
+  .databox, .selectbox
+    height: 200px
+    overflow-x: hidden
+    .list
+      height: 24px
+      line-height: 24px
+.datalist
+  margin-left: 20px
+.selectlist
+  .list
+    label
+      padding-left: 30px
+.portlet
+  color: #505050
+  line-height: 1.5em
+  margin-bottom: 10px
+  padding: 6px
+
+.area
+  h3
+    @include shielded_line
+    font-size: 16px !important
+    padding: 0.1em
+    margin:
+      top: 0
+      bottom: 0.4em
+
+    

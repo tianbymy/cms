@@ -1,0 +1,85 @@
+%header
+  %h2 主页
+
+%section
+  .area.area_a
+    %article.portlet.todo
+      %header
+        %h3 待审稿
+        %nav= link_to "进入处理",waiting_audit_articles_path
+      %section
+        %table.list
+          %thead
+            %tr
+              %th 文稿
+              %th 频道/栏目
+              %th 类型
+              %th 提交人
+              %th 提交时间
+          - Infodeploy::Article.where(:state => "waiting").desc("updated_at").each_with_index do |article,count|
+            - if (Infodeploy::Programa.find(article.programa_id) rescue nil) != nil
+              %tbody
+                %tr
+                  = render "infodeploy/dashboard/#{article.type}",:count => count,:news => article
+
+    %article.portlet.help
+      %header
+        %h3 操作入门
+      %section
+        %p 频道
+        %p 新建文稿
+              
+  .area.area_b
+    %article.portlet.timeline.box
+      %header
+        %h3 时间线
+      %section.today
+        - now_time=Time.now.strftime('%Y-%m-%d')
+        %header
+          %h4 #{now_time}--新建文稿
+        %section
+          %ul
+            - Infodeploy::Article.all.desc("created_at").each_with_index do |article,count|
+              - if (Infodeploy::Programa.find(article.programa_id) rescue nil) != nil
+                - count=count+1
+                - if count<= 10
+                  - if article.created_at.strftime('%Y-%m-%d').include?(now_time)
+                    %li
+                      = article.created_at.strftime('%H:%M')
+                      = article.creator
+                      = article.get_operate
+
+        %header
+          %h4 #{now_time}--审核文稿
+        %section
+          %ul
+            - Infodeploy::Article.all.desc("audit_date").each_with_index do |article,count|
+              - if (Infodeploy::Programa.find(article.programa_id) rescue nil) != nil
+                - count=count+1
+                - if count<= 10
+                  - if article.audit_date != nil
+                    - if article.audit_date.strftime('%Y-%m-%d').include?(now_time)
+                      %li
+                        = article.audit_date.strftime('%H:%M')
+                        = article.auditor
+                        审核
+                        = article.get_operate
+
+        %header
+          %h4 #{now_time}--发布文稿
+        %section
+          %ul
+            - Infodeploy::Article.where(:state => "success").desc("audit_date").each_with_index do |article,count|
+              - if (Infodeploy::Programa.find(article.programa_id) rescue nil) != nil
+                - count=count+1
+                - if count<= 10
+                  - if article.audit_date != nil
+                    - if article.audit_date.strftime('%Y-%m-%d').include?(now_time)
+                      %li
+                        = article.audit_date.strftime('%H:%M')
+                        = article.auditor
+                        发布
+                        = article.get_operate
+
+
+      

@@ -1,0 +1,19 @@
+= link_to "新建视频", new_video_path
+%table
+  %tr
+    %th 标题
+    %th 视频
+    %th 图片
+    %th 描述
+    %th 排序
+    %th 操作
+
+- @videos.each do |video|
+  %tr
+    %td= video.title
+    %td=link_to "附件", video.video.url
+    %td
+      %img{:src=> "#{video.image.url}",:style=>"width:100px;"}
+    %td= video.description
+    %td= video.number
+    %td= link_to "删除", video_path(:id => video.id), confirm: "您是否要删除此信息?", :method => "delete" 

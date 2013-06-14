@@ -1,0 +1,32 @@
+.main_content1
+  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+    %tr
+      %td.topleft
+      %td.topcenter
+        .titlebt 新建视频
+      %td.topright
+    %tr
+      %td.centerleft
+      %td.centercenter
+        = form_for @video,:html => {:multipart => true} do |f|
+          .field
+            %label 标题
+            = f.text_field :title, :class => "user_text"
+          .field
+            %label 视频
+            = f.file_field :video, :class => "user_text" 
+          .field
+            %label 图片
+            = f.file_field :image, :class => "user_text"
+          .field
+            %label 描述
+            = f.text_field :description, :class => "user_text"
+          .fiedl
+            %label 排序
+            = f.text_field :number, :class => "user_text"
+          =  f.submit "上传"  
+      %td.centerright
+    %tr
+      %td.bottomleft
+      %td.bottomcenter
+      %td.bottomright 

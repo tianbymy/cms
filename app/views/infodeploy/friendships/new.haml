@@ -1,0 +1,10 @@
+%header
+  %h2 新建链接
+
+%section
+  = form_for @friendship,:as => :friendship,:url => friendships_path,:method => :post,:html => {:multipart => true} do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render "form", f: f, friendship: @friendship 
+
+   
+            

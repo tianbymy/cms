@@ -1,0 +1,6 @@
+%header
+  %h2 页面编辑
+%section
+  = form_for @page,:as => :page,:url => page_path(:id => @page.id),:method => :put do |f|
+    = render "form",:f => f
+ 

@@ -1,0 +1,10 @@
+%header
+  %h2
+    为
+    = params[:number]
+    号广告位新建广告    
+%section
+  = form_for @advertisement,:as =>:advertisement,:url => ad_advertisements_path(:ad_id => @ad.id),:method => :post, :html => {:multipart => true} do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render 'form',:f => f,:advertisement => @advertisement,:ad => @ad
+  

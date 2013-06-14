@@ -1,0 +1,12 @@
+%header
+  %h2
+    新增
+    = @kind.name
+    链接
+
+%section
+  = form_for @partner,:as => :partner,:url => kind_partners_path(:kind_id => @kind.id),:method => :post do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render "form",:f => f
+
+            

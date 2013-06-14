@@ -1,0 +1,36 @@
+= render "form"
+%p
+  %label 批量上传图片
+  %span.require &nbsp;
+  %input{name:"slide[image][][name]",type:"file"}
+  %span 图片描述
+  %input{name:"slide[image][][describe]",type:"text"}
+  = link_to "增加","#",:onclick => "add_slide();return false;"
+.slides
+%p
+  %label 已上传图片
+  - slides=Infodeploy::Slide.where(:article_id => @article.id)
+  %span.require &nbsp;
+  %div{:id => "images",:class => "images"}
+    - if slides.size == 0
+      未上传图片
+    - else
+      - slides.each_with_index do |slide,count|
+        - count=count+1
+        - if count==1
+          .div
+            %img{:src=> "#{slide.image.url}",:style=>"width:100px;"}
+            %span= slide.describe
+            = link_to "删除","#",:onclick => "if (confirm('您是否要删除此图片?')){destroy_image('#{slide.id}',$(this))};return false;"
+        - else
+          .div
+            %br
+            %label -
+            %span.require &nbsp;
+            %img{:src=> "#{slide.image.url}",:style=>"width:100px;"}
+            %span= slide.describe
+            = link_to "删除","#",:onclick => "if (confirm('您是否要删除此图片?')){destroy_image('#{slide.id}',$(this))};return false;"
+%p
+  %label 附件
+  %span.require &nbsp;
+  %input{name:"wordage[attachment]",type:"file"}

@@ -1,0 +1,42 @@
+.portlet.box
+  %p
+    %label 标题
+    %span.require *
+    %input#business_ad{name:"business_ad[title]", value:"#{@business_ad.title}"}
+
+    = error_span(@business_ad,:title,"标题")
+  %p
+    %label 招商企业
+    %span.require *
+    %input#business_ad{name:"business_ad[enterprise]", value:"#{@business_ad.enterprise}"}
+    = error_span(@business_ad,:enterprise,"招商企业")
+  %p
+    %label 行业
+    %span.require *
+    = f.select :industry,([["---请选择---",""]]+Infodeploy::BusinessAd.industries).collect{|ind| [ind[0],ind[1]]},{:selected => @business_ad.industry}
+    = error_span(@business_ad,:industry,"行业")
+  %p
+    %label 联系人
+    %span.require *
+    %input#business_ad{name:"business_ad[contactor]", value:"#{@business_ad.contactor}"}
+    = error_span(@business_ad,:contactor,"联系人")
+  %p
+    %label 联系电话
+    %span.require *
+    %input#business_ad{name:"business_ad[contact_method]", value:"#{@business_ad.contact_method}"}
+    = error_span(@business_ad,:contact_method,"联系电话")
+  %p
+    %label 显示截止时间
+    %span.require *
+    = f.text_field :end_date,:class=>"Wdate",:onclick=>"WdatePicker({dateFmt:\'yyyy-MM-dd HH:00:00\'})"
+    = error_span(@business_ad,:end_date,"显示截止时间")
+  .clear
+  %p
+    %label 内容
+    %span.require *
+    = f.kindeditor :content, :width => 700, :height => 300
+    = error_span(@business_ad,:content,"内容")
+
+%footer
+  = f.submit "保存并发布",:disable_with => "提交中..."
+  = link_to "返回",business_ad_index_path

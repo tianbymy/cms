@@ -1,0 +1,25 @@
+.main_content1
+  %h2.title1上传资料
+  = form_for @knowledge,:html => {:multipart => true} do |f|
+    .item
+      %label 标题
+      = f.text_field :title,:class => "user_text"
+    .item
+      %label 附件类型
+      = f.radio_button :knowledge_type, 1
+      文档
+      = f.radio_button :knowledge_type, 2
+      图片
+    .item
+      %label 附件
+      = f.file_field :attachment,:class => "user_text"
+    .item
+      %label.label_kn 描述
+      = f.text_area :description, :size => "60x8"
+    .item
+      %label 排序
+      = f.text_field :number,:class => "user_text"
+    =  f.submit "上传"
+
+
+

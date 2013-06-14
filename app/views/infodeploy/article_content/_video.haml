@@ -1,0 +1,8 @@
+= render "infodeploy/article_content/public"
+= render "infodeploy/article_content/public_wordage"
+%p
+  %label 视频:
+  - if @wordage.video.url == nil
+    未上传
+  - else
+    = link_to "下载视频", @wordage.video.url

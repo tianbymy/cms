@@ -1,0 +1,7 @@
+%header
+  %h2 编辑信息
+
+%section
+  = form_for @business_ad,:as => :business_ad,:url => business_ad_path(:id => @business_ad.id),:method => :put do |f|
+    = render "form",:f => f
+

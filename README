@@ -1,0 +1,32 @@
+# 在另一个 Rails 项目中使用 infodeploy
+
+  1. 把 infodeploy 项目放在主项目的 /vendor/engines 目录下，把 infodeploy 项目中 /vendor 目录下的 Rails_kindeditor 目录放置在 主项目中的 /vendor 目录下。
+
+  2.  在 Gemfile 中添加如下代码：
+
+      	 
+     gem 'infodeploy', :path => "vendor/engines/infodeploy"
+     gem 'mongoid'
+     gem 'bson_ext'
+     gem 'carrierwave'
+     gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+     gem 'rails_kindeditor', :path => "vendor/rails_kindeditor"
+     gem 'state_machine'
+   
+   3. 在主 项目中的 config/routes.rb 挂载 engine，添加如下代码：
+
+      	   mount Infodeploy::Engine => "/infodeploy"
+
+     4. 然后运行 `rails g infodeploy`
+
+# 介绍 infodeploy 的功能
+
+   我们首先默认用户已经登录。当我们访问   infodeploy/new 时。
+   是用户发布新闻的列表，并可以查看发布新闻的状态。
+   用户可以点击 “发布新闻”发布新闻。新闻编辑器是富文本编辑器 rails_kindeditor。
+   可以用它格式文本。上传附件。创建后就可以发布并预览新闻。但不能修改新闻了。
+   新闻共有四种通过状态，当用户创建是默认是 waiting ,当访问 /infodeploy/check 是，看到的是等待通过审查的新闻列表。
+   点击一天进入详细查看。并审查是否通过。通过是逐级验证的，分first_passed,second_passed,third_passed。
+   当第三次通过后自动跳转到 /infodeploy/check 。
+   如果没有通过，則新闻状态变成 fail_pass。此时用户可以在通过查看新闻详情修改新闻。
+   只有状态为 third_passed 的新闻才可以 /infodeply/home 中看到，并可以点击相应标题查看详情

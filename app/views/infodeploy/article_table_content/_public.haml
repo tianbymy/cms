@@ -1,0 +1,26 @@
+- wordage=Infodeploy::Wordage.where(:article_id => news.id).first
+%td=count+1
+%td
+  = check_box_tag "news[]",news.id
+%td= wordage.title
+%td
+  = Infodeploy::Channel.find(news.channel_id).name
+  |
+  - if news.programa_id != nil and news.programa_id != ""
+    = Infodeploy::Programa.find(news.programa_id).name
+%td= Infodeploy::Programa.get_kind_name(news.type)
+%td
+  = news.creator
+  %br
+    =news.created_at.strftime('%Y-%m-%d %H:%M:%S')
+%td= wordage.author
+%td
+  - if wordage.out_of_date
+    - if wordage.deploy_type == 0
+      = wordage.deploy_start.strftime('%Y-%m-%d')
+      %span /
+      = wordage.deploy_end.strftime('%Y-%m-%d')
+    - else
+      永久
+  - else
+    %span{:style => "color:red;"} 已过期

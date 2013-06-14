@@ -1,0 +1,13 @@
+- @document=Infodeploy::Document.where(:article_id => @article.id).first
+%p
+  %label 标题:
+  = @document.title
+%p
+  %label 概述:
+  = @document.overview
+%p
+  %label 文档:
+  - if @document.content.url == nil
+    未上传
+  - else
+    = link_to "下载附件", @document.content.url

@@ -1,0 +1,10 @@
+= render "form"
+%p
+  %label 附件
+  %span.require &nbsp;
+  %input{name:"wordage[attachment]",type:"file"}
+%p
+  %label 内容
+  %span.require *
+  = error_span(@wordage,:content,"内容")
+  = kindeditor_tag "wordage[content]","#{@article_attributes.content}", :width => 750, :height => 300

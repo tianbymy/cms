@@ -1,0 +1,8 @@
+%header
+  %h2 编辑类别
+
+%section
+  = form_for @kind,:as => :kind,:url => kind_path(:id => @kind.id),:method => :put do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render "form",:f => f
+

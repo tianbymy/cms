@@ -1,0 +1,6 @@
+.main_content1
+  %h2.title1 编辑首页区域显示信息
+  %h3 编辑首页区域 #{@home_management.number} 显示信息
+  = form_for @home_management,:as => :home_management,:url => home_path(:id => @home_management.id),:method => :put do |f|
+    = render "form",:f => f,:channels => @channels,:home_management => @home_management
+

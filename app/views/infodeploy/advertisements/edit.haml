@@ -1,0 +1,7 @@
+%header
+  %h2 编辑#{@number}号广告位 名为#{@advertisement.name}的广告
+
+  = form_for @advertisement,:as =>:advertisement,:url => ad_advertisement_path(:ad_id => @ad.id,:id => @advertisement.id),:method => :put, :html => {:multipart => true} do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render 'form',:f => f,:advertisement => @advertisement,:ad => @ad
+

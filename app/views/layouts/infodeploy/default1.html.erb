@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Infodeploy</title>
+  <%= stylesheet_link_tag    "infodeploy/application", :media => "all" %>
+    <%= javascript_include_tag :application %>
+    <%=  javascript_include_tag "jsdate/WdatePicker"  %>
+    <%= javascript_include_tag params[:controller] %>
+    <%= stylesheet_link_tag params[:controller] %>
+
+    
+    <%=  javascript_include_tag "jquery.cookie"  %>
+    <%=  javascript_include_tag "kindeditor"  %>
+    <%= stylesheet_link_tag 'infodeploy/skin' %>
+    <%= stylesheet_link_tag 'infodeploy/admins' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="header">
+<p>四川生产服务网后台管理系统</p>
+<div class="adm">
+  <% if session[:id] == nil %>
+    <p><%=
+        #link_to "请登录", login_users_path
+      %></p>
+  <% else %>
+  <p>欢迎管理员 <%= Infodeploy::User.find(session[:id]).name %>：感谢登录使用！［<%= link_to "注销",logout_admins_path %>］</p>
+  <% end %>
+  
+</div></div>
+
+<div class="main_content">
+<div class="main_menu">
+      <div id="container">
+      <%= admin_navicates %>
+      <script type="text/javascript">
+       var idx=$.cookie("menutitle");
+        if(idx){
+          $(".submenu").hide().eq(idx).show();
+        }else{
+        $(".submenu").hide().eq(0).show();        
+        }
+        $(".menutitle").click(function(){
+          var ck=$(".menutitle").index($(this));
+          $.cookie("menutitle",ck)
+          $(".submenu").hide()
+          $(this).next("ul").slideToggle();
+        })
+          </script>
+      </div>
+</div>
+<%= yield %>
+</div>
+
+</body>
+</html>

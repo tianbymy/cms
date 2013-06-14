@@ -1,0 +1,11 @@
+%div= flash[:send_audit_info]
+= form_tag send_more_audit_articles_path,:method => :post do   
+  = render table,:newses => newses
+
+  = link_to "全选","#",:onclick => "checkall()"
+  |
+  = link_to "取消","#",:onclick => "cancel()"
+  |
+  = submit_tag "批量发送至审核",:class =>"batch", confirm: "您是否要将草稿发送至审核?",:disable_with => "提交中..."
+
+  

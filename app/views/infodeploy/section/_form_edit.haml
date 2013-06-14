@@ -1,0 +1,25 @@
+.useritem 
+  .item
+    %label{:for=>:number}
+      区域
+    = f.text_field :number,:class => "user_text",:disabled=>"disabled"
+  .item
+    .selectlist
+      %p 应用列表
+      %p (向下滑动以显示更多)
+      %div{:class=>"selectbox box"}
+        -Infodeploy::Portlet.all.asc("file").each do |list|
+          .list
+            - if @sections.portlet_ids.include?(list.id)
+              = check_box_tag 'portlet_ids[]', list.id,:checked=>"checked"
+            -else
+              = check_box_tag 'portlet_ids[]', list.id
+            = label_tag list.title
+    .clear
+
+
+  .submit_save
+    = f.submit "保存",:disable_with => "提交中..."
+    = link_to "返回",managerment_page_section_index_path(@pages),:class => "button_return"
+      
+     

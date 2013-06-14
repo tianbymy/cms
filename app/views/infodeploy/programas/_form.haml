@@ -1,0 +1,37 @@
+.portlet.box
+  %p
+    %label 频道：
+    %span.require &nbsp;
+    = channel.name
+  %p
+    %label 名称：
+    %span.require *
+    %input#programa_name{name:"programa[name]",value:"#{programa.name}"}
+    = error_span(programa,:name,"名称")
+  %p
+    %label 文章类型:
+    %span.require *
+    - Infodeploy::Programa.make_kinds.each do |kind|
+      = check_box_tag "kinds[]",kind[1],programa.get_kinds(kind[1])
+      %span=kind[0]
+    = error_span(programa,:kinds,"文章类型")
+
+  %p
+    = f.label "关键字:"
+    %span.require &nbsp;
+    = f.text_field :keyword 
+    %span 注意:多个关键字请以逗号隔开
+  %p
+    = f.label "描述:"
+    %span.require &nbsp;
+    = f.text_field :describe
+  %p
+    %span 禁用:
+    = f.check_box :enabled
+.submit_save
+  = f.submit "保存",:disable_with => "提交中..."
+  - if (Infodeploy::Programa.find(programa.id) rescue nil) == nil
+    = f.submit "保存并继续",:disable_with => "提交中...",:name => "agin"
+  = link_to "返回",channel_programas_path(:channel_id => channel.id),:class => "button_return"
+
+

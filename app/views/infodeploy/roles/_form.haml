@@ -1,0 +1,20 @@
+= form_for @role do |f|
+  .portlet.box
+    = error_span(@role, :name, "角色名")
+    %p
+      = f.label "角色名"
+      %span.require *
+      = f.text_field :name
+
+    %p
+      = f.label "权限："
+      %span 
+        = link_to "全选","#",:onclick => "checkallmenuitem()"
+        |
+        = link_to "取消","#",:onclick => "cancelmenuitem()"
+      - Infodeploy::MenuItem.nav.each do |item|
+        = check_box_tag 'role[menu_items][]', item[:descr], @role.right_exist?( item[:descr] )
+        %span= item[:descr]
+
+  %footer
+    = f.submit "保存"

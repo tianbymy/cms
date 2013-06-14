@@ -1,0 +1,77 @@
+%header
+  %nav
+    %a.icon.icon-add{href:managerment_page_index_path()} 返回页面管理
+  %h2 布局应用显示
+
+%section
+  - for i in (1..Integer(@pages.layout.areanumber))
+    -if i %2  != 0
+      -cname = "area area_a"
+    -else
+      -cname = "area area_b"
+    %div{:class=>cname}
+      %article.portlet
+        %header
+          %nav
+            -section= @section.where(number:i)
+            -if section.first !=nil
+              =link_to "添加应用",new_page_section_portlet_path(@pages,section.first)
+          %h3
+            区域
+            =i
+
+        %section
+          -if section.first !=nil
+            %table.list
+              %thead
+                %tr
+                %th 序号
+                %th 标题
+                %th 类别|频道|栏目
+                %th 资源文件
+                %th 数量
+                %th 操作
+              %tbody
+                -portlets=Infodeploy::Portlet.where(:section_id=>section.first.id).asc("number")
+                -if portlets.first !=nil
+                  -index=0
+                  -portlets.each do |portlet|                    
+                    %tr
+                      %td
+                        =index=index+1
+                      %td=portlet.title
+                      %td
+                        -Infodeploy::Portlet.get_portlet_type.each do |s|
+                          -if Integer(portlet.type)==s[:id]
+                            =s[:value]
+                        -if portlet.option["channel_id"] != ""
+                          =Infodeploy::Channel.find(portlet.option["channel_id"]).name
+                          -if portlet.option["programa_id"] ==''
+                            所有
+                        -if portlet.option["programa_id"] !=''
+                          - programa=Infodeploy::Programa.find(portlet.option["programa_id"]) rescue nil
+                          - if programa != nil
+                            = programa.name
+                      %td
+                        =portlet.option["uri"]
+                        = Infodeploy::Ads.find(portlet.option["ads_id"]).number unless portlet.option["ads_id"].nil?
+                        = "号" unless portlet.option["ads_id"].nil?
+                      %td
+                        =portlet.option["shownumber"]
+                        - Infodeploy::Ads.get_size.each do |idx|                          
+                          -if portlet.option["size"] == idx[:id].to_s
+                            =idx[:size]
+                      %td
+                        =link_to "编辑",edit_page_section_portlet_path(@pages,section.first,portlet)
+                        =link_to "删除",page_section_portlet_path(@pages,section.first,portlet),:confirm=> '您是否要删除该应用?', :method =>:delete
+                        %br 
+                        - if index != 1
+                          %a{:href=>page_section_portlet_move_portlet_top_path(@pages,section.first,portlet)} 上移
+                        - if index !=portlets.size
+                          %a{:href=>page_section_portlet_move_portlet_bottom_path(@pages,section.first,portlet)} 下移
+
+          -else
+            .list
+              此区域尚未初始化，请先点击 初始化 对此区域进行初始化,
+              =link_to "初始化",new_page_section_path(@pages,i)
+

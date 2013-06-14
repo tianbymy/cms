@@ -1,0 +1,64 @@
+.portlet.box
+  %p
+    %label 显示名称
+    %span.require *
+    %input#portlets{name:"portlets[title]", value:"#{@portlets.title}"}
+    %span.example 用于页面显示，请保持字数统一
+    =error_span(@portlets,:title,"显示名称")
+  %p
+    %label 应用类型
+    %span.require *
+    - Infodeploy::Portlet.get_portlet_type.each  do |list|
+      -if list[:id]==@portlets.type
+        =radio_button "portlets","type",list[:id],:checked=>"checked"
+      -else
+        =radio_button "portlets","type",list[:id]
+      =list[:value]
+
+  %p.class_for_1.class_for_form
+    %label 关联频道
+    %span.require *
+    -if @portlets.option != nil
+      =select "portlets[option]","channel_id",Infodeploy::Channel.all.collect{|c| [c.name,c.id]},{:include_blank=>"---请选择---",:selected=>@portlets.option["channel_id"]}
+    -else
+      =select "portlets[option]","channel_id",Infodeploy::Channel.all.collect{|c| [c.name,c.id]},{:include_blank=>"---请选择---"}
+  %p.class_for_1.class_for_form
+    %label 关联栏目
+    %span.require &nbsp;
+    -if @portlets.option !=nil
+      -programas=Infodeploy::Programa.where(:channel_id =>@portlets.option["channel_id"])
+      =select "portlets[option]","programa_id",programas.collect{|c| [c.name,c.id]},{:include_blank=>"全选",:selected=>@portlets.option["programa_id"]}
+    -else
+      =select "portlets[option]","programa_id",{:全选=>""}
+  %p.class_for_1.class_for_form
+    %label 栏目图片
+    %span.require &nbsp;
+    %input{:type => "file",:name => "portlets[logo]"}
+  %p.class_for_1.class_for_form.class_for_2
+    %label 组件名称
+    %span.require *
+    -if @portlets.option !=nil
+      =select "portlets[option]","uri",Infodeploy::Widgets.get_widgets.collect{|c| [c[1,c.length-6],c[1,c.length-6]]},{:include_blank=>"---请选择---",:selected=>@portlets.option["uri"]}
+    -else
+      =select "portlets[option]","uri",Infodeploy::Widgets.get_widgets.collect{|c| [c[1,c.length-6],c[1,c.length-6]]},{:include_blank=>"---请选择---"}
+  %p.class_for_1.class_for_form
+    %label 显示数量
+    %span.require *
+    -if @portlets.option !=nil
+      %input#portlets{name:"portlets[option][shownumber]",id:"portlets_option_shownumber",:value=>@portlets.option["shownumber"]}
+    -else
+      %input#portlets{name:"portlets[option][shownumber]",id:"portlets_option_shownumber"}
+  %p.class_for_3.class_for_form
+    %label 广告尺寸
+    %span.require *
+    -if @portlets.option != nil and @portlets.option["size"]!=""
+      =select "portlets[option]","size",Infodeploy::Ads.get_size.collect{|c| [c[:size],c[:id]]},{:include_blank=>"---请选择---",:selected=>Integer(@portlets.option["size"])}
+    -else
+      =select "portlets[option]","size",Infodeploy::Ads.get_size.collect{|c| [c[:size],c[:id]]},{:include_blank=>"---请选择---"}
+
+
+.submit
+  = f.submit "保存",:disable_with => "提交中..."
+  = link_to "返回",managerment_page_section_index_path(params[:page_id])
+
+

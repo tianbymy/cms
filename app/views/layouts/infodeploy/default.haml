@@ -1,0 +1,48 @@
+%html
+  %head
+    %title 四川生产服务网后台管理系统
+    = stylesheet_link_tag "infodeploy/application", :media => "all"
+    = javascript_include_tag :application
+    = javascript_include_tag "jsdate/WdatePicker"
+    = javascript_include_tag "jquery.cookie"
+    = javascript_include_tag "infodeploy/jquery.form"
+    = javascript_include_tag "kindeditor"
+    = javascript_include_tag params[:controller]
+    = csrf_meta_tags
+  %body
+    %header#home
+      %h1 四川生产服务网后台管理系统
+      - unless session[:cas_user].nil?
+        %h3{align: "right"}
+          = session[:cas_user]
+          = link_to "注销", logout_admins_path
+          
+      - if session[:cas_user].nil?
+        %nav
+          %ul
+            - Infodeploy::MenuItem.nav.each do |item|
+              %li
+                - selected = ((params[:controller] == item[:controller]) and (params[:action] == item[:action]))
+                - if item.include?(:url)
+                  %a{href: item[:url],target:item[:target]}= item[:descr]
+                - else
+                  %a{href: url_for(controller: item[:controller], action: item[:action]), class: (selected ? "selected" : ""),target:item[:target]}= item[:descr]
+
+      -# 下面是根据权限动态显示导航的，为了方便先用上面全部显示导航
+      %nav
+        %ul
+          - rights = Infodeploy::User.find_rights(session[:cas_user])
+          - unless rights.blank?
+            - rights.each do |right|
+              - Infodeploy::MenuItem.nav.each do |item|
+                - if item[:descr] == right
+                  %li
+                    - selected = ((params[:controller] == item[:controller]) and (params[:action] == item[:action]))
+                    - if item.include?(:url)
+                      %a{href: item[:url],target:item[:target]}= item[:descr]
+                    - else
+                      %a{href: url_for(controller: item[:controller], action: item[:action]), class: (selected ? "selected" : ""),target:item[:target]}= item[:descr]
+
+
+    %article.workarea
+      = yield

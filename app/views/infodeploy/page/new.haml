@@ -1,0 +1,6 @@
+%header
+  %h2 添加页面
+%section
+  = form_for @page,:as => :page,:url => page_index_path,:method => :post do |f|
+    = render "form",:f => f
+   

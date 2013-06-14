@@ -1,0 +1,21 @@
+.new {
+        margin-left: 20px;
+}
+.key {
+        margin-left: 9px;
+}
+.item_new{
+        padding:8px 0 0 22px;
+        font-size:12px;
+
+}
+.item_p > input {
+    margin-left: 28px;
+}
+.item_q > input {
+    margin-left: 18px;
+}
+.area{
+        background: #fff;
+        margin-left:55px;
+}

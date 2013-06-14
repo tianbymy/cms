@@ -1,0 +1,9 @@
+
+%header
+  %h2 组件编辑
+
+%section
+  = form_for @portlets,:as => :portlets,:url => page_section_portlet_path(:id => params[:id]),:method => :put,:html => {:multipart => true} do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render "form",:f => f
+

@@ -1,0 +1,11 @@
+%header
+  %h2 编辑默认 
+  = form_for @advertisement,:as => :advertisement,:url => update_default_ad_advertisements_path(params[:ad_id]),:method => :put, :html => {:multipart => true} do |f|
+    .portlet.box
+      = f.label :图片
+      = f.file_field :image
+      = error_span(@advertisement,:image,"图片")
+    %footer
+      = f.submit "保存",:disable_with => "提交中..."
+      = link_to "返回",advertisements_path
+

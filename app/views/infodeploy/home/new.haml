@@ -1,0 +1,6 @@
+.main_content1
+  %h2.title1 新增频道
+  %h3 新增首页区域 #{@area} 显示信息
+  = form_for @home_management,:as => :home_management,:url => home_index_path(:area => @area),:method => :post do |f|
+    = render "form",:f => f,:channels => @channels,:home_management => @home_management
+

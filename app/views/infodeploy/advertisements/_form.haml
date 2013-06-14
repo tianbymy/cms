@@ -1,0 +1,48 @@
+.portlet.box
+  %p
+    = f.label :图片
+    %span.require *
+    = f.file_field :image
+    = error_span(advertisement,:image,"图片")
+    %span
+      图片尺寸为:
+      = Infodeploy::Ads.get_size_by(ad)
+  %p
+    = f.label :链接
+    %span.require *
+    = f.text_field :link
+    %span 请以http://开头
+    = error_span(advertisement,:link,"链接")
+  %p
+    = f.label :联系人
+    %span.require *
+    = f.text_field :contactor
+    = error_span(advertisement,:contactor,"联系人")
+  %p
+    = f.label :联系方式
+    %span.require *
+    = f.text_field :contact_method
+    = error_span(advertisement,:contact_method,"联系方式")
+  %p
+    = f.label :开始时间
+    %span.require *
+    -if advertisement.start_date!=nil
+      -start_date=advertisement.start_date.strftime('%Y-%m-%d %H:%M:%S')
+    -else
+      -start_date=""
+    = f.text_field :start_date,:class=>"Wdate begin_date",:value=>start_date,:onclick=>"WdatePicker({maxDate:'#F{$dp.$D(\\\'advertisement_end_date\\\',{d:-1})}',dateFmt:'yyyy-MM-dd HH:00:00'})"
+    = error_span(advertisement,:start_date,"开始时间")
+  .clear
+  %p
+    = f.label :结束时间
+    %span.require *
+    -if advertisement.end_date!=nil
+      -end_date=advertisement.end_date.strftime('%Y-%m-%d %H:%M:%S')
+    -else
+      -end_date=""
+    = f.text_field :end_date,:class=>"Wdate end_date",:value=>end_date,:onclick=>"WdatePicker({minDate:'#F{$dp.$D(\\\'advertisement_start_date\\\',{d:1})}',dateFmt:'yyyy-MM-dd HH:00:00'})"
+    = error_span(advertisement,:end_date,"结束时间")
+  
+%footer
+  = f.submit "保存",:disable_with => "提交中..."
+  = link_to "返回",advertisements_path,:class =>"button_4"

@@ -1,0 +1,24 @@
+.text_top
+  .text_select
+    = form_tag attribute_query_article_queries_path,:id => "search_list",:method => :post do
+      = text_field_tag "page",1,:style => "display: none;"
+      %span1 搜索条件：
+      = select "attributes","name",[["---请选择---",""],["标题","title"],["栏目","channel"],["发布人","auditor"],["作者","author"],["状态","state"]],{:selected => @attributes_name},:onchange => "make_element(this.value);"
+
+      %span{:id => "attribute_element"}
+        - if @keyword != nil
+          = text_field_tag "keyword",@keyword,:style=>'width:90px'
+        - if @channel != nil
+          = select "channels","id",(Infodeploy::Channel.all.asc("number")).collect{|c| [c.name,c.id.to_s]},{:selected => @channel},:onchange => "get_programas(this.value);"
+          %span{:id => "make_programa"}
+            - if @channel != nil
+              = select "programas","id",([Infodeploy::Programa.new(:name => "---请选择---",:id => "")]+Infodeploy::Programa.where(:channel_id => Infodeploy::Channel.find(@channel).id)).collect{|c| [c.name,c.id.to_s]},{:selected => @programa}
+        - if @status != nil
+          = select "states","id",[["显示中","displaing"],["已过期","out_of_date"],["已下架","out_of_stock"]].collect{|state| [state[0],state[1]]},{:selected => @status}
+
+            
+      = submit_tag "搜索"
+      %span.error-message
+        = flash[:query_info]
+
+= render table,:newses => newses

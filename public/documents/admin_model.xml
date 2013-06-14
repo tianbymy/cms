@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<models>
+  <model>
+    <title>内容管理</title>
+    <marked>content</marked>
+  </model>
+  <model>
+    <title>广告管理</title>
+    <marked>advertising</marked>
+  </model>
+  <model>
+    <title>用户管理</title>
+    <marked>user</marked>
+  </model>
+  <model>
+    <title>系统管理</title>
+    <marked>system</marked>
+  </model>
+  
+</models>

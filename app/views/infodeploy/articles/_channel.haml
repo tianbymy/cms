@@ -1,0 +1,49 @@
+%div
+  %label 
+    栏目
+    - if (Infodeploy::Article.find(@article.id) rescue nil) == nil
+      = link_to "(重新设置)",new_article_path
+  %span.require *
+  - if @channel == nil
+    = select "article","channel_id", ([Infodeploy::Channel.new(:name => "---请选择---",:id => "")]+Infodeploy::Channel.asc("number")).collect{|c| [c.name,c.id]},{},:onchange => "getPrograma(this.value,'#{@article.type}');"
+    = error_span(@article,:programa_id,"栏目")
+    = error_span(@article,:channel_id,"栏目")
+    %span.programa
+      - if @article.channel_id != nil and @article.channel_id != ""
+        - programas=Infodeploy::Programa.where(:channel_id => Infodeploy::Channel.find(@article.channel_id).id)
+        - if programas.size > 0
+          = select "article","programa_id", programas.collect{|p| [p.name,p.id]},{},:selected => @article.programa_id,:onchange => "get_programa_kinds(this.value,'#{@article.type}')"
+  - else
+    = Infodeploy::Channel.find(@channel).name
+    - if @programa != nil
+      |
+      = Infodeploy::Programa.find(@programa).name
+
+
+.article_type
+  - if @programa == nil
+    - if @article.programa_id != nil
+      - programa=Infodeploy::Programa.find(@article.programa_id)
+      .item
+        %label 文章类型
+        %span.require *
+        - Infodeploy::Programa.make_kinds.each do |kind|
+          - if programa.kinds.include?(kind[1])
+            = f.radio_button :type,kind[1],:class => "fl"
+            = f.label kind[0]
+        = error_span(@article,:type,"文章类型")
+  - else
+    - programa=Infodeploy::Programa.find(@programa)
+    %p
+      %label 文章类型
+      %span.require *
+      - Infodeploy::Programa.make_kinds.each do |kind|
+        - if programa.kinds.include?(kind[1])
+          - if @article.type != nil
+            - if @article.type == kind[1]
+              = f.radio_button :type,kind[1],:class => "fl"
+              = f.label kind[0],:class=>"sadsadas"
+          - else
+            %input{name:"article[type]",id:"article_type",type:"radio",value:"#{kind[1]}"}
+            = error_span(@article,:type,"文章类型")
+            = f.label kind[0]

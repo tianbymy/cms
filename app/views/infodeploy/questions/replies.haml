@@ -1,0 +1,23 @@
+%header
+  %nav
+    = link_to "返回",questions_path
+  %h2 企业提问回复历史
+  %h3
+    回复问题
+    = @question.content
+  %section
+    %table.list
+      %thead
+        %tr
+          %th 回复人
+          %th 回复内容
+          %th 回复时间
+          %th 操作
+      %tbody
+        - @asks.each do |ask|
+          %tr
+            %td= ask.person
+            %td= ask.content
+            %td= ask.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            %td= link_to "删除",delete_repliy_questions_path(:repliy_id => ask.id,:question_id => @question.id),confirm: "您是否要删除此回复?",:method => :delete
+              

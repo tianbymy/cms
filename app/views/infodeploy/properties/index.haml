@@ -1,0 +1,28 @@
+%header
+  %nav
+    = link_to "新增属性", new_property_path
+  %h2 新增属性
+  
+
+%section
+  %table.list
+    %thead
+      %td 序号
+      %td 名称
+      %td 标识
+      %td 录入时间
+      %td 操作
+    %tbody
+    - @properties.each_with_index do |property,count|
+      %tr
+        %td= count+1
+        %td= property.name
+        %td= property.marked
+        %td= property.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        %td
+          = link_to "编辑",edit_property_path(:id => property.id)
+          - if property.system !=0
+            = link_to "删除", property_path(:id => property.id), confirm: "您是否要删除此文章属性?", :method => "delete"
+
+
+

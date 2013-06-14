@@ -1,0 +1,58 @@
+%header
+  %nav
+    =link_to "新建栏目", new_channel_programa_path(:channel_id => @channel.id)
+
+  %hgroup
+    %h2 栏目管理
+    %h3
+      %span
+        %a(href="/infodeploy/channels") 频道
+      = ":"
+      %span
+        = @channel.name
+    .div{:style => "text-align: center;color:red;"}
+      %span= flash[:programa_info]
+
+
+%section
+  %table.list
+    %thead
+      %tr
+        %th 序号
+        %th 名称
+        %th 文章类型
+        %th 创建于
+        %th 更新于
+        %th 状态
+        %th 操作
+
+    %tbody
+      - @channel.programas.each_with_index do |programa,count|
+        %tr
+          %td= count+1
+          %td
+            / %a(href="javascript:void(0)" onclick="ajax_find_data('#{attribute_query_article_queries_path()}','#{@channel.id}','#{programa.id}')")
+            =programa.name
+          %td= Infodeploy::Programa.get_kinds_name(programa.kinds)
+          %td
+            = programa.createuser
+            %br
+            = programa.created_at.strftime('%Y-%m-%d %H:%M:%S')
+          %td
+            = programa.modifyuser
+            %br
+            = programa.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+          %td
+            - if programa.enabled == 0
+              %span.yes
+              启用
+            - else
+              %span.no
+              禁用
+          %td
+            = link_to "编辑", edit_channel_programa_path(:channel_id => @channel.id,:id => programa.id)
+            |
+            = link_to "删除",channel_programa_path(:channel_id => @channel.id,:id => programa.id),:confirm=> '您确定要删除此栏目?',:method => :delete
+            |
+            = link_to "新建文章",new_article_path(:channel_id => @channel.id,:programa_id => programa.id)
+

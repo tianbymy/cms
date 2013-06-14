@@ -1,0 +1,83 @@
+- if @article_attributes == nil
+  - @article_attributes=Infodeploy::Wordage.where(:article_id => @article.id).first
+  - if @article_attributes == nil
+    -  @article_attributes=Infodeploy::Wordage.new
+
+%p
+  %label 标题
+  %span.require *
+  %input{name:"wordage[title]",value:"#{@article_attributes.title}"}
+  = error_span(@article_attributes,:title,"标题")
+%p
+  %label 作者
+  %span.require *
+  %input{name:"wordage[author]",value:"#{@article_attributes.author}"}
+  = error_span(@article_attributes,:author,"作者")
+%p
+  %label 关键词
+  %span.require *
+  %input{name:"wordage[keyword]",value:"#{@article_attributes.keyword}"}
+  = error_span(@article_attributes,:keyword,"关键词")
+  %span.example 请输入关键字，并以英文逗号隔开
+%p
+  %label 发布时间
+  - if @article_attributes.deploy_type == nil
+    %input{name:"wordage[deploy_type]",type:"radio",value:"1",checked:"checked",:onclick => "cancel_deploy_date()"}
+
+    %label{:class=>"lable_for_radio"} 永久
+    %input{name:"wordage[deploy_type]",type:"radio",value:"0",:onclick => "make_deploy_date('#{@article_attributes.deploy_start}','#{@article_attributes.deploy_end}')"}
+    %label{:class=>"lable_for_radio"} 指定范围
+  - else
+    - if @article_attributes.deploy_type == 1
+      %input{name:"wordage[deploy_type]",type:"radio",value:"1",checked:"checked",:onclick => "cancel_deploy_date()"}
+ 
+      %label{:class=>"lable_for_radio"} 永久
+      %input{name:"wordage[deploy_type]",type:"radio",value:"0",:onclick => "make_deploy_date('#{@article_attributes.deploy_start}','#{@article_attributes.deploy_end}')"}
+      %label{:class=>"lable_for_radio"} 指定范围
+    - else
+      %input{name:"wordage[deploy_type]",type:"radio",value:"1",:onclick => "cancel_deploy_date()"}
+ 
+      %label{:class=>"lable_for_radio"} 永久
+      %input{name:"wordage[deploy_type]",type:"radio",value:"0",checked:"checked",:onclick => "make_deploy_date('#{@article_attributes.deploy_start}','#{@article_attributes.deploy_end}')"}
+      %label{:class=>"lable_for_radio"} 指定范围
+
+.deploy_date
+  - if @article_attributes.deploy_type == 0
+    %p
+      %label.left 开始时间
+    %p
+      = text_field_tag "wordage[deploy_start]","#{@article_attributes.deploy_start}",:onclick=>"WdatePicker({maxDate:'#F{$dp.$D(\'wordage_deploy_end\',{d:-1})}',dateFmt:'yyyy-MM-dd HH:00:00'})",:class=>"Wdate begin_date left"
+      %label.left 结束时间
+      = text_field_tag "wordage[deploy_end]","#{@article_attributes.deploy_end}",:onclick => "WdatePicker({minDate:'#F{$dp.$D(\'wordage_deploy_start\',{d:1})}',dateFmt:'yyyy-MM-dd HH:00:00'})",:class=>"Wdate begin_date left"
+.clear
+%p
+  %label 权限
+  = radio_button_tag "wordage[permission]","public",:checked => true
+  %label.lable_for_radio 公开
+.clear
+%p
+  %label 摘要
+  %span.require *
+  = text_area_tag "wordage[overview]","#{@article_attributes.overview}", :size => "60x4"
+  = error_span(@article_attributes,:overview,"摘要")
+.clear
+%p
+  %label 属性
+  - Infodeploy::Property.all.each do |property|
+    = check_box_tag 'kinds[]', property.marked,@article_attributes.get_kinds(property.marked)
+    %label{:for =>property.marked,:class=>"lable_for_radio"}
+      =property.name
+  = error_span(@article_attributes,:kinds,"属性")
+.clear
+%p
+  %label 封面图片
+  %span.require &nbsp;
+  %input{name:"wordage[image]",type:"file"}
+  = error_span(@article_attributes,:image,"图片")
+%p
+  %label 已上传封面图片
+  %span.require &nbsp;
+  - if @article_attributes.image.url == nil
+    未上传
+  - else
+    %img{:src=> "#{@article_attributes.image.url}",:style=>"width:100px;"}

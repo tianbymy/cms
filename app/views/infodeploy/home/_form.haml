@@ -1,0 +1,16 @@
+.item
+  %label 栏目
+  = f.select :channel_id, ([Infodeploy::Channel.new(:name => "---请选择---",:id => "")]+Infodeploy::Channel.where(:enabled => 0).asc("number")).collect{|c| [c.name,c.id]},{},:onchange => "getHomePrograma(this.value);"
+  %span.programa
+    - if home_management.channel_id != nil
+      - programas=Infodeploy::Programa.get_by_channel(home_management.channel_id) 
+      - if programas.size > 0 
+        = f.select :programa_id, programas.collect{|p| [p.name,p.id]},{},:selected => home_management.programa_id
+= error_div(home_management,:channel_id,"栏目")
+.item
+  %label 文章显示数量
+  = f.select :amount,[["---请选择---",""],[1,1],[2,2],[3,3],[4,4],[5,5]]
+= error_div(home_management,:amount,"文章显示数量")
+.submit
+  = f.submit "保存",:disable_with => "提交中..."
+  = link_to "返回",managerment_home_index_path

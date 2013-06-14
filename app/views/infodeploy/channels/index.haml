@@ -1,0 +1,33 @@
+%header
+  %nav
+    %a.icon.icon-add{href: "/infodeploy/channels/new"} 新建频道
+  %h2 频道管理
+  .div{:style => "text-align: center;color:red;"}
+    %span= flash[:channel_info]
+
+%section
+  %table.list
+    %tr
+      %th 频道名称
+      %th 创建于
+      %th 更新于
+      %th 操作
+      
+    - @channels.each_with_index do |channel,count|
+      %tr
+        %td
+          = link_to channel.name, channel_programas_path(channel.id)
+        %td
+          = channel.createuser
+          %br
+          = channel.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        %td
+          = channel.modifyuser
+          %br
+          = channel.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+        %td
+          = link_to "编辑", edit_channel_path(channel)
+          |
+          = link_to "删除",channel,:confirm=> '您确定要删除此频道?', :method =>:delete
+          |
+          = link_to "栏目管理",channel_programas_path(:channel_id => channel.id)

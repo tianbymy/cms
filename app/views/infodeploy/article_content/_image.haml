@@ -1,0 +1,10 @@
+= render "infodeploy/article_content/public"
+= render "infodeploy/article_content/public_wordage"
+%p
+  %label 大量图片:
+  - slides=Infodeploy::Slide.where(:article_id => @article.id)
+  - if slides.size == 0
+    未上传
+  - else
+    - slides.each do |slide|
+      %img{:src=> "#{slide.image.url}",:style=>"width:100px;"}

@@ -1,0 +1,31 @@
+%header
+  %nav
+    = link_to "新建页面", new_page_path, class: "icon icon-add" 
+  %h2 页面
+
+%section
+  %table.list
+    %thead
+      %tr
+        %th.number 序号
+        %th 名称
+        %th 布局名称
+        %th 区域数
+        %th 操作
+    %tbody
+      - index=0
+      - @page.each do |list|      
+      - index=index+1
+        %tr
+          %td.number= index
+          %td= list.title
+          %td= list.layout.title
+          %td= list.layout.areanumber
+          %td
+            = link_to "编辑", edit_page_path(list)
+            |
+            = link_to "应用管理",managerment_page_section_index_path(list)
+            - if list.system !=0
+              = link_to "删除", page_path(list),:confirm=> '您是否要删除该页面?', :method =>:delete
+
+

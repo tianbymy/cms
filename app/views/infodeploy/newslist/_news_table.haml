@@ -1,0 +1,19 @@
+%section
+  %table.list
+    %thead
+      %tr
+        = render "infodeploy/newslist/article_title"
+        %th 操作
+        %th 是否发布
+    %tbody
+      - newses.each_with_index do |news,count|
+        %tr
+          = render "infodeploy/article_table_content/#{news.type}",:count => count,:news => news
+          %td
+            = link_to "预览", article_waiting_audit_show_path(:article_id => news.id)
+            |
+            = link_to "编辑",edit_article_path(:id => news.id,:page => "waiting_audit")
+          %td
+            =link_to "发布",audit_articles_path(:article_id => news.id,:deploy => "true"),confirm: "您是否确定此文章已通过审核并发布?",:method => :post
+            |
+            =link_to "退回",audit_articles_path(:article_id => news.id,:fail => "true"),confirm: "您是否确定此文章未通过审核并移至回收站?",:method => :post

@@ -1,0 +1,15 @@
+.portlet.box
+  %p
+    %label 名称
+    %span.require *
+    %input#page{name:"page[title]", value:"#{@page.title}"}
+    =error_span(@page,:title,"名称")
+  %p
+    %label 布局
+    %span.require &nbsp;
+    =f.select :layout_id,Infodeploy::Layout.all.asc("file").collect{|c| [c.title,c.id]}
+    %span.example 若修改此项，布局应用将会被删除，并需要重新配置
+
+%footer
+  = f.submit "保存",:disable_with => "提交中..."
+  = link_to "返回",managerment_page_index_path,:class => "button_return"

@@ -1,0 +1,33 @@
+.useritem 
+  .item
+    %label 
+      区域
+    - if @sections[:number]!=nil
+      = f.text_field :number,:class => "user_textf"
+    -else
+      %input{:class=>"user_text",:id=>"sections_number",:name=>"sections[number]",:value=>params[:number]}
+  .item
+    .selectlist
+      %p 应用列表
+      %p (向下滑动以显示更多)
+      %div{:class=>"selectbox box"}
+        -@p=Infodeploy::Section.where(:number=>params[:number]).where(:page_id=>params[:page_id]).first
+        -if @p
+          -@pidx=@p.portlet_ids
+        -else
+          -@pidx=[]
+        -Infodeploy::Portlet.all.asc("file").each do |list|
+          .list
+            - if @pidx.include?(list.id)
+              = check_box_tag 'portlet_ids[]', list.id,:checked=>"checked"
+            -else
+              = check_box_tag 'portlet_ids[]', list.id
+            = label_tag list.title
+    .clear
+
+
+  .submit_save
+    = f.submit "保存",:disable_with => "提交中..."
+    = link_to "返回",managerment_page_section_index_path(@pages),:class => "button_return"
+      
+     

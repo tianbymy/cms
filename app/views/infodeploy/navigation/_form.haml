@@ -1,0 +1,43 @@
+.portlet.box
+  %p
+    %label 名称
+    %span.require *
+    %input#navigation{name:"navigation[name]", value:"#{@navigation.name}"}
+    =error_span(@navigation,:name,"显示名称")
+    %span.example 用于导航显示
+
+  %p
+    %label 显示页面
+    %span.require &nbsp;
+    =f.select :page_id,Infodeploy::Page.all.asc("file").collect{|c| [c.title,c.id]}
+  .clear
+  %p
+    %label 新窗口打开
+    %span.require &nbsp;
+    = f.check_box :openpage
+  .clear
+  %p
+    %label 主导航隐藏
+    %span.require &nbsp;
+    = f.check_box :enabled
+  .clear
+  %p
+    %label 排序
+    %span.require *
+    %input#navigation{name:"navigation[number]", value:"#{@navigation.number}"}
+
+    =error_span(@navigation,:number,"排序")
+    %span.example 数字越小越靠前显示
+  %p
+    %label 外链
+    %span.require &nbsp;
+    =f.text_field :url
+    =error_span(@navigation,:url,"名称")
+    %span.example 外链请以http(s):// 开头，不是外链请不要填写
+
+
+.submit_save
+  = f.submit "保存",:disable_with => "提交中..."
+  = link_to "返回",managerment_navigation_index_path,:class => "button_return"
+      
+     

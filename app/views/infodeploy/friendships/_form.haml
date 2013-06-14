@@ -1,0 +1,29 @@
+.portlet.box
+  %p
+    %label(for="friendship_name") 显示名称
+    %span.require *
+    %input.friendship_name{name:"friendship[name]", type:"text", value:"#{friendship.name}", placeholder: "在网页上显示的链接名称"}
+    = error_span(friendship, :name, "显示名称")
+    %span.example 例：百度
+
+  %p
+    %label(for="friendship_link") 链接地址
+    %span.require *
+    %input.friendship_link.required{name:"friendship[link]", value:"#{friendship.link}", placeholder: "http://www.example.com"}
+    = error_span(friendship,:link,"链接地址")
+    %span.example 例：http://www.baidu.com
+
+  %p
+    %label(for="friendship_logo") LOGO
+    %span.require &nbsp;
+    = f.file_field :image
+    %span.example 图片尺寸：88*31
+
+  %p
+    %span 禁用
+    = f.check_box :enabled
+    
+%footer
+  = f.submit "保存",:disable_with => "提交中..."
+  %a{:href => "/infodeploy/friendships"}返回
+

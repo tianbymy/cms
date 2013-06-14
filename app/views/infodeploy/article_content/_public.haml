@@ -1,0 +1,8 @@
+%p
+  %label 栏目:
+  = Infodeploy::Channel.find(@article.channel_id).name
+  - if @article.programa_id != nil and @article.programa_id != ""
+    = Infodeploy::Programa.find(@article.programa_id).name
+%p
+  %label 文稿类型:
+  = Infodeploy::Programa.get_kind_name(@article.type)

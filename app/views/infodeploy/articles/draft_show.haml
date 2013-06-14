@@ -1,0 +1,12 @@
+%header
+  %h2 预览
+
+%section
+  .portlet.box
+    = render "infodeploy/article_content/#{@article.type}"
+%footer
+  = link_to "编辑",edit_article_path(:id => @article.id,:page => "index")
+  |
+  =link_to "发送至审核",send_audit_articles_path(:article_id => @article.id), confirm: "您是否要将文章草稿发送至审核?",:method => :post
+  |
+  %a{:href =>"/infodeploy/articles",:class => "button_return"}返回

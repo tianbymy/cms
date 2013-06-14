@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://finance.ifeng.com/app/2012/0206/166.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>证券指数</title>
+<style>
+body { font:12px "宋体"; color:#333;}
+table{border-collapse:collapse;border-spacing:0;} 
+a {text-decoration:none; color:#333} 
+a:hover {text-decoration:underline;}
+
+
+.tab01{width:312px; height:40px}
+
+.Ared,.Ared a{color:#ff0000; }
+.Agreen,.Agreen a{color:#257207; }
+</style>
+</head>
+
+<body marginwidth="0" marginheight="0">
+<div class="tab01" id="qqgz">
+<table width="312" border="0" cellspacing="0" cellpadding="0" height="40px">
+  <tbody><tr align="center">
+    <td height="20"><a href="http://finance.ifeng.com/app/hq/stock/sh000001/" target="_blank">上证&nbsp;&nbsp;<font class="Agreen">2228.26</font></a></td>
+
+    <td height="20"><a href="http://app.finance.ifeng.com/hq/global_ind/index.php?area=america" target="_blank">道指 <font class="Ared">12640.78</font></a></td>
+    <td height="20"><a href="http://app.finance.ifeng.com/hq/global_ind/index.php?area=america" target="_blank">纳指 <font class="Ared">2892.42</font></a></td>
+    </tr>
+  <tr align="center">
+    <td height="20"><a href="http://finance.ifeng.com/app/hq/stock/sh000001/" target="_blank"><font class="Agreen">-32.61</font>&nbsp;<font class="Agreen">-1.44%</font></a></td>
+    <td height="20"><a href="http://app.finance.ifeng.com/hq/global_ind/index.php?area=america" target="_blank"><font class="Ared">67.21</font>&nbsp;<font class="Ared">0.53%</font></a></td>
+    <td height="20"><a href="http://app.finance.ifeng.com/hq/global_ind/index.php?area=america" target="_blank"><font class="Ared">33.33</font>&nbsp;<font class="Ared">1.17%</font></a></td>
+
+    </tr>
+
+  </tbody></table>
+</div>
+
+<script language="JavaScript" id="hq_data" src="q.php"></script>
+<script language="JavaScript">
+<!--
+var zshq_tpl = document.getElementById("qqgz").innerHTML;
+function show_hq()
+{
+	var zshq_html = zshq_tpl;
+
+	for(var code in json_q)
+	{
+		var last = json_q[code][0];
+		var hst_close = json_q[code][1];
+		var chg = json_q[code][2];
+		var chg_pct = json_q[code][3];
+
+		last = last.toFixed(2);
+		chg = chg.toFixed(2);
+
+		chg_pct = chg_pct.toFixed(2);
+		var color = "Ared";
+		if (chg < 0)
+		{
+			color = "Agreen";
+		}
+
+		zshq_html = zshq_html.replace("<!--"+code+"_last-->", "<font class='"+color+"'>"+last+"</font>");
+		zshq_html = zshq_html.replace("<!--"+code+"_chg-->", "<font class='"+color+"'>"+chg+"</font>");
+		zshq_html = zshq_html.replace("<!--"+code+"_chg_pct-->", "<font class='"+color+"'>"+chg_pct+"%</font>");
+
+	}
+	document.getElementById("qqgz").innerHTML = zshq_html;
+}
+function set_hq()
+{
+	document.getElementById("hq_data").src = "http://hq.finance.ifeng.com/q.php?l=s_sh000001,s_int_indu,s_int_ccmp&f=json&e=show_hq();&random="+Math.random();
+}
+set_hq();
+//window.setInterval("set_hq()", 60000);
+
+//-->
+</script>
+
+
+</body></html>

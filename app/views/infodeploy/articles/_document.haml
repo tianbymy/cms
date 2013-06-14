@@ -1,0 +1,23 @@
+- if @article_attributes == nil
+  - @article_attributes=Infodeploy::Document.where(:article_id => @article.id).first
+  - if @article_attributes == nil
+    -  @article_attributes=Infodeploy::Document.new
+%p
+  %label 标题
+  %span.require *
+  %input{name:"document[title]",value:"#{@article_attributes.title}"}
+  = error_span(@article_attributes,:title,"标题")
+%p
+  %label 概述
+  %span.require *
+  %input{name:"document[overview]",value:"#{@article_attributes.overview}"}
+  = error_span(@article_attributes,:overview,"概述")
+%p
+  %label 文档
+  %span.require &nbsp;
+  %input{name:"document[content]",type:"file"}
+  = error_span(@article_attributes,:content,"文档")
+
+  
+
+.clear

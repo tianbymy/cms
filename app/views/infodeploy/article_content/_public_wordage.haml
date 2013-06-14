@@ -1,0 +1,39 @@
+- @wordage=Infodeploy::Wordage.where(:article_id => @article.id).first
+%p
+  %label 标题:
+  = @wordage.title
+%p
+  %label 作者:
+  = @wordage.author
+%p
+  %label 发布时间:
+  - if @wordage.deploy_type == 0
+    = @wordage.deploy_start.strftime('%Y-%m-%d')
+    %span /
+    = @wordage.deploy_end.strftime('%Y-%m-%d')
+  - else
+    永久
+%p  
+  %label 关键词:
+  = @wordage.keyword
+%p
+  %label 摘要:
+  = @wordage.overview
+%p
+  %label 图片:
+  - if @wordage.image.url == nil
+    未上传
+  - else
+    %img{:src=> "#{@wordage.image.url}",:style=>"width:100px;"}
+%p
+  %label 附件:
+  - if @wordage.attachment.url == nil
+    未上传
+  - else
+    = link_to "下载附件", @wordage.attachment.url
+%p
+  %label 属性:
+  - if @wordage.kinds != nil
+    = @wordage.make_kinds_name
+  - else
+    尚未设置

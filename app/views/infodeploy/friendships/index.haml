@@ -1,0 +1,38 @@
+%header
+  %nav
+    %a.icon.icon-add{href:url_for(controller: :friendships, action: :new)} 新建链接
+  %h2 友情链接
+
+%section
+  %table.list
+    %thead
+      %tr
+        %th 序号
+        %th 名称
+        %th 链接
+        %th LOGO图片
+        %th 启用
+        %th 操作
+
+    %tbody
+      - @friendships.each_with_index do |friendship,count|
+        %tr
+          %td= count + 1
+          %td= friendship.name
+          %td= friendship.link
+          %td
+            - if friendship.image.url == nil
+              未上传
+            - else
+              %img{:src=> "#{friendship.image.url}",:style=>"width:88px;height:31px;"}
+          %td
+            %span
+              - if friendship.enabled == 0
+                = "是"
+              - else
+                = "否"
+          %td
+            = link_to "编辑", edit_friendship_path(friendship)
+            |
+            = link_to "删除", friendship_path(friendship),confirm: '您是否要删除该友情链接?',:method => :delete
+

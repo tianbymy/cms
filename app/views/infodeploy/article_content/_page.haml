@@ -1,0 +1,5 @@
+= render "infodeploy/article_content/public"
+- alone=Infodeploy::Alone.where(:article_id => @article.id).first
+%p
+  %label 内容:
+  = raw alone.content

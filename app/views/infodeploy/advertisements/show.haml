@@ -1,0 +1,27 @@
+%herder
+  %h2 广告预览
+
+%section
+  .portlet.box
+    .item
+      %label 名称:
+      = @advertisement.name
+    .item
+      %label 联系人:
+      = @advertisement.contactor
+    .item
+      %label 联系方式:
+      = @advertisement.contact_method
+    - if @advertisement.condition == 1
+      .item
+        %label 开始时间
+        = @advertisement.start_date.strftime('%Y-%m-%d %H:%M:%S')
+      .item
+        %label 结束时间:
+        = @advertisement.end_date.strftime('%Y-%m-%d %H:%M:%S')
+    .item
+      %label 图片:
+      -@adssize=Infodeploy::Ads.get_size_by(Infodeploy::Ads.find(@advertisement[:ads_id])).split("x")
+      %img{:src=> "#{@advertisement.image.url}",:width =>@adssize[0]+"px",:height =>@adssize[1]+"px"}
+  = link_to '返回', :back
+

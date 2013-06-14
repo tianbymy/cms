@@ -1,0 +1,10 @@
+%header
+  %h2 修改用户角色
+
+  = form_for(@user) do |f|
+    = render 'form', :f => f
+    .action
+      = f.submit "保存"
+
+  = link_to "返回", users_path
+  = link_to "更新用户数据", sync_users_path

@@ -1,0 +1,23 @@
+%header
+  %nav
+    = link_to "返回",admins_path
+  %h2 企业提问管理
+  %section
+    %table.list
+      %thead
+        %tr
+          %th 提问人
+          %th 问题
+          %th 提问时间
+          %th 操作
+      %tbody
+        - @questions.each do |question|
+          %tr
+            %td= question.person
+            %td= question.content
+            %td= question.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            %td
+              = link_to "回复",new_question_path(:question_id => question.id)
+              = link_to "历史回复",question_replies_path(:question_id => question.id)
+              = link_to "删除",question_path(:id => question.id),confirm: "您是否要删除此提问?",:method => :delete
+              

@@ -1,0 +1,45 @@
+.main_content1
+  %h2.title1 知识库
+  %a{:href => "/infodeploy/knowledges/new",:class => "button_t"} 上传资料
+  %table{:align => "center", :bgcolor => "#c7c8c9", :border => "0", :cellpadding => "2", :cellspacing => "1", :style => "margin-top:8px", :width => "97%"}
+    %tr{:align => "center", :bgcolor => "#FAFAF1", :height => "22",:class =>"cu"}
+      %td{:width => "5%"} 序号
+      %td{:width => "3%"} 选择
+      %td{:width => "15%"} 标题
+      %td{:width => "10%"} 描述
+      %td{:width => "11%"} 类型
+      %td{:width => "8%"} 上传时间
+      %td{:width => "9%"} 点击
+      %td{:width => "7%"} 上传人
+      %td{:width => "17%"} 操作
+    %tr{:align => "center", :bgcolor => "#FFFFFF", :height => "22", :onMouseMove => "javascript:this.bgColor='#FCFDEE';", :onMouseOut => "javascript:this.bgColor='#FFFFFF';"}
+      %td{:width => "5%"}
+      %td{:width => "3%"}
+        %input#id.np{:name => "id", :type => "checkbox", :value => "94"}
+      %td{:width => "15%"}
+      %td{:width => "10%"}
+      %td{:width => "11%"}
+      %td{:width => "8%"}
+      %td{:width => "9%"}
+      %td{:width => "7%"}
+      %td{:width => "17%"} 编辑 ｜ 查看 ｜ 通过发布
+    %tr{:align => "center", :bgcolor => "#FFFFFF", :height => "22", :onMouseMove => "javascript:this.bgColor='#FCFDEE';", :onMouseOut => "javascript:this.bgColor='#FFFFFF';"}
+      %td{:width => "5%"}
+      %td{:width => "3%"}
+        %input#id.np{:name => "id", :type => "checkbox", :value => "94"}
+        %td{:width => "15%"}
+        %td{:width => "10%"}
+        %td{:width => "11%"}
+        %td{:width => "8%"}
+        %td{:width => "9%"}
+        %td{:width => "7%"}
+        %td{:width => "17%"} 编辑 ｜ 查看 ｜ 通过发布
+
+  - @knowledge.each do |knowledge|
+    %tr
+      %td= knowledge.title
+      %td=link_to "附件", knowledge.attachment.url
+      %td= knowledge.description
+      %td= knowledge.knowledge_type
+      %td= knowledge.number
+      %td= link_to "删除", knowledge_path(:id => knowledge.id), confirm: "您是否要删除此信息?", :method => "delete"

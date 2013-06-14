@@ -1,0 +1,15 @@
+- catenate=Infodeploy::Catenate.where(:article_id => news.id).first
+%td=count+1
+%td
+  = check_box_tag "news[]",news.id
+%td= catenate.title
+%td
+  = Infodeploy::Channel.find(news.channel_id).name
+  |
+  - if news.programa_id != nil and news.programa_id != ""
+    = Infodeploy::Programa.find(news.programa_id).name
+%td= Infodeploy::Programa.get_kind_name(news.type)
+%td
+  =news.created_at.strftime('%Y-%m-%d %H:%M:%S')
+%td
+%td

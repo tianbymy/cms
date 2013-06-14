@@ -1,0 +1,19 @@
+%header
+  %h2 新建
+%section
+  = form_for @article,:as => :article,:url => articles_path(:channel => @channel,:programa => @programa),:method => :post,:html => {:multipart => true} do |f| 
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    .portlet.box
+      = render 'channel',:f => f
+      .clear
+        %div{:id => "append_page"}
+          - if @article[:type] != nil
+            = render @article[:type],:f => f
+    .submit
+      %a{:href => "new"} 上一步
+      = f.submit "保存",:name => "save",:disable_with => "提交中..."
+      - if (Infodeploy::Article.find(@article.id) rescue nil) == nil
+        =f.submit "保存并继续",:name => "save_agin",:disable_with => "提交中..."
+      - if ["draf","new"].count(@article[:state]) == 1
+        = f.submit "保存并提交审核",:name => "save_audit",:disable_with => "提交中..."
+    

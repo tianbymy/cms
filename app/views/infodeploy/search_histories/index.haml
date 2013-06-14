@@ -1,0 +1,21 @@
+%header
+  %nav
+    = link_to "返回",admins_path
+  %h2 关键字管理
+  %section
+    %table.list
+      %thead
+        %tr
+          %th 关键字
+          %th 搜索次数
+          %th 最后搜索时间
+          %th 操作
+      %tbody
+        - @histories.each do |history|
+          %tr
+            %td= history.keyword
+            %td= history.count
+            %td= history.updated_at.strftime('%Y-%m-%d %H:%M:%S')
+            %td
+              = link_to "编辑",edit_search_history_path(:id => history.id)
+              = link_to "删除",search_history_path(:id => history.id),:method => :delete,confirm: "您是否确定删除此关键字?"

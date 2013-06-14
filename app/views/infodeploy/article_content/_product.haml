@@ -1,0 +1,16 @@
+- @product=Infodeploy::Product.where(:article_id => @article.id).first
+%p
+  %label 标题:
+  = @product.title
+%p
+  %label 所属企业:
+  = @product.organ
+%p
+  %label logo:
+  %image{:src => "#{@product.logo.url}"}
+%p
+  %label 产品类别:
+  = @product.categories.join(",")
+%p
+  %label 购买主体:
+  = @product.consumers.join(",")

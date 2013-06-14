@@ -1,0 +1,28 @@
+%header
+  %nav
+    = link_to "新建角色", new_role_path
+    = link_to "返回",admins_path
+  %h2 角色列表
+  
+%section
+  %table.list
+    %thead
+      %tr
+        %th 角色名字
+        %th 权限
+        %th 用户
+        %th 操作
+
+    %tbody
+      - @roles.each do |role|
+        %tr
+          %td= link_to role.name, new_more_users_path(:id => role.id.to_s)
+          %td= role.menu_items.join(" ") unless role.menu_items.blank?
+          %td= get_name(role.users)
+
+          %td
+            - unless role.is_admin?
+              = link_to '编辑权限', edit_role_path(role)
+            = link_to "用户列表", new_more_users_path(:id => role.id.to_s)
+            - unless role.lock == true
+              = link_to '删除', role, confirm: "您是否要删除?", :method => "delete" 

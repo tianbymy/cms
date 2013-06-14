@@ -1,0 +1,15 @@
+%header
+  %h2 回复
+%section
+  = form_tag questions_path(:question_id => @question.id),:method => :post do
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    .portlet.box
+      %p
+        %label 回复内容
+        %span.require *
+        %textarea{name:"ask[content]",:cols => "60",:rows => "10"}
+        = error_span(@ask,:content,"回复内容")
+
+      .clear
+    .submit
+      = submit_tag "保存",:name => "next",:disable_with => "提交中..."

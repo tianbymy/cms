@@ -1,0 +1,7 @@
+%header
+  %h2 插入应用
+%seciton
+  = form_for @portlets,:as => :portlets,:url => page_section_portlet_index_path,:method => :post,:html => {:multipart => true} do |f|
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    = render "form",:f => f
+

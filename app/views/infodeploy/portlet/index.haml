@@ -1,0 +1,26 @@
+%header
+  %nav
+    = link_to "添加应用",new_portlet_path()
+  %h2
+    组件应用
+
+%section
+  %table.list
+    %thead
+      %tr
+        %th 序号
+        %th 栏目名称
+        %th 资源文件
+        %th 显示数量
+        %th 操作
+      -index=0
+      - @portlets.each do |list|
+      - index=index+1
+        %tr
+          %td= index
+          %td= list.title
+          %td= list.uri
+          %td= list.shownumber
+          %td
+            = link_to "编辑", edit_portlet_path(list)
+            = link_to "删除", portlet_path(list),:confirm=> '您是否要删除该导航?', :method =>:delete

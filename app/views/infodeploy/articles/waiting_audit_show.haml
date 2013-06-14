@@ -1,0 +1,12 @@
+%header
+  %h2预览
+%section
+.portlet.box
+  = render "infodeploy/article_content/#{@article.type}"
+%footer
+  = link_to "编辑",edit_article_path(:id => @article.id,:page => "waiting_audit")
+  |
+  =link_to "发布",audit_articles_path(:article_id => @article.id,:result => "deploy"),confirm: "您是否确定此文章已通过审核并发布?",:method => :post
+  |
+  =link_to "退回",audit_articles_path(:article_id => @article.id,:result => "fail"),confirm: "您是否确定此文章未通过审核并移至回收站?",:method => :post
+  %a{:href =>"/infodeploy/articles/waiting_audit",:class => "button_return"}返回

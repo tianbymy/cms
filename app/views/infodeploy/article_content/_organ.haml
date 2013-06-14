@@ -1,0 +1,16 @@
+- @organ=Infodeploy::Organ.where(:article_id => @article.id).first
+%p
+  %label 企业名称:
+  = @organ.title
+%p
+  %label logo:
+  %image{:src => "#{@organ.logo.url}"}
+%p
+  %label 产品类别:
+  = @organ.categories.join(",")
+%p
+  %label 摘要:
+  = @organ.overview
+%p
+  %label 内容:
+  = raw @organ.content

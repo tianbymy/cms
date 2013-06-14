@@ -1,0 +1,21 @@
+.portlet.box
+  %p
+    %label 名称
+    %span.require *
+    %input#layout{name:"layout[title]", value:"#{@layout.title}"}
+    =error_span(@layout,:title,"名称")
+    %span.example 名称不能重复
+  %p
+    %label 资源文件
+    %span.require *
+    =f.select :file,Infodeploy::Layout.get_layouts.collect{|c| [c[0,c.length-5],c[0,c.length-5]]}
+    =error_span(@layout,:file,"资源文件")
+    %span.example 资源文件不能重复
+  %p
+    %label 区域数
+    %span.require &nbsp;
+    %input#layout{name:"layout[areanumber]", value:"#{@layout.areanumber}"}
+    %span.example 必须为数字
+.submit
+  = f.submit "保存",:disable_with => "提交中..."
+  = link_to "返回",managerment_layout_index_path

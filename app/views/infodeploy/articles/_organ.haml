@@ -1,0 +1,37 @@
+- if @article_attributes == nil
+  - @article_attributes=Infodeploy::Organ.where(:article_id => @article.id).first
+  - if @article_attributes == nil
+    -  @article_attributes=Infodeploy::Organ.new
+
+
+%p
+  %label 企业名称
+  %span.require *
+  %input{name:"organ[title]",value:"#{@article_attributes.title}"}
+  = error_span(@article_attributes,:title,"企业名称")
+%p
+  %label logo
+  %span.require *
+  %input{name:"organ[logo]",type:"file"}
+  = error_span(@article_attributes,:logo,"logo")
+%p
+  %label 机构类别
+  %span.require *
+  - Infodeploy::Organ.categories.each do |category|
+    - if @article_attributes.categories.include?(category)
+      %input{name:"organ[categories][]",:type => "checkbox",:checked => "checked",:value => "#{category}"}
+      %span= category
+    - else
+      %input{name:"organ[categories][]",:type => "checkbox",:value => "#{category}"}
+      %span= category
+  = error_span(@article_attributes,:categories,"机构类别")
+%p
+  %label 摘要
+  %span.require *
+  = text_area_tag "organ[overview]","#{@article_attributes.overview}", :size => "60x4"
+  = error_span(@article_attributes,:overview,"摘要")
+%p
+  %label 内容
+  %span.require *
+  = error_span(@article_attributes,:content,"内容")
+  = kindeditor_tag "organ[content]","#{@article_attributes.content}", :width => 750, :height => 300

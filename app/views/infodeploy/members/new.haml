@@ -1,0 +1,35 @@
+%header
+  %h2 新建
+%section
+  = form_tag  members_path,:method => :post do
+    %p.notice 操作说明：标注红色"*"号的内容为必填项。
+    .portlet.box
+      %p
+        %label 用户名
+        %span.require *
+        %input{name:"member[uid]",:value => "#{@member[:uid]}"}
+        = register_errors(:uid,"用户名",@errors)
+      %p
+        %label 姓
+        %span.require *
+        %input{name:"member[sn]",:value => "#{@member[:sn]}"}
+        = register_errors(:sn,"姓",@errors)
+      %p
+        %label 名
+        %span.require *
+        %input{name:"member[cn]",:value => "#{@member[:cn]}"}
+        = register_errors(:cn,"名",@errors)
+      %p
+        %label 密码
+        %span.require *
+        %input{name:"member[userPassword]",type:"password"}
+        = register_errors(:userPassword,"密码",@errors)
+      .item
+        %label 重复密码
+        %span.require *
+        %input{:name => "repeat_password", :type => "password"}
+
+      .clear
+    .submit
+      = submit_tag "保存",:name => "next",:disable_with => "提交中..."
+      = link_to "返回",members_path
