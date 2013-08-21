@@ -12,9 +12,10 @@ PATH
       httpclient
       rails (~> 3.2.3)
       rubycas-client-rails
+      simple_form
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     actionmailer (3.2.13)
       actionpack (= 3.2.13)
@@ -140,6 +141,9 @@ GEM
     rubycas-client-rails (0.1.0)
       rails (>= 3.0.0)
       rubycas-client (>= 2.2.0)
+    simple_form (2.1.0)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
@@ -192,6 +196,7 @@ DEPENDENCIES
   mongoid
   rails_kindeditor (~> 0.3.0)
   rubycas-client
+  simple_form
   simplecov
   slim
   sqlite3
