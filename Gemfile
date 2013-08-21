@@ -8,8 +8,8 @@ gemspec
 gem 'mongoid'
 gem 'bson_ext'
 gem 'carrierwave'
-gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
-gem 'rails_kindeditor','~> 0.3.0'
+gem 'carrierwave-mongoid',"~> 0.6.0", :require => 'carrierwave/mongoid'
+gem 'rails_kindeditor','~> 0.4.0'
 
 gem 'zhiyi-member', :git => 'git@task.zhiyisoft.com:talent/zhiyi/zhiyi-member.git'
 
@@ -20,6 +20,9 @@ gem 'simple_form'
 gem 'rubycas-client'
 gem "httpclient", "~> 2.2.5"
 gem 'will_paginate_mongoid'
+gem "jquery-rails"
+gem 'sqlite3'
+
 group :test do
     # Pretty printed test output
     gem 'simplecov', :require => false
@@ -29,4 +32,3 @@ group :test do
     gem 'cucumber-rails'
     gem 'webrat'
 end
-gem "jquery-rails"
